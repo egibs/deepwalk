@@ -108,26 +108,26 @@ go test ./... -v
     --- PASS: TestDeepWalk/Test_case_13_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
     --- PASS: TestDeepWalk/Test_case_14_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
 === RUN   TestDeepwalkRandomSuccess
---- PASS: TestDeepwalkRandomSuccess (0.26s)
+--- PASS: TestDeepwalkRandomSuccess (0.27s)
 === RUN   TestDeepwalkRandomDefault
---- PASS: TestDeepwalkRandomDefault (3.20s)
+--- PASS: TestDeepwalkRandomDefault (3.12s)
 PASS
-ok  	egibs/deepwalk	3.554s
+ok  	github.com/egibs/deepwalk	3.590s
 ```
 
 ## Benchmarks
 Run the three included benchmarks by running `make bench`:
 ```sh
-make bench                                                                                                (deepwalk) 19:36:58
+make bench                                                                                                (deepwalk) 20:35:43
 go test -bench=.
 goos: darwin
 goarch: arm64
-pkg: egibs/deepwalk
-BenchmarkDeepwalkMinimalJSON-10    	  186184	      6425 ns/op
-BenchmarkDeepwalkSuccess-10        	    4609	    245696 ns/op
-BenchmarkDeepwalkDefault-10        	     354	   3326961 ns/op
+pkg: github.com/egibs/deepwalk
+BenchmarkDeepwalkMinimalJSON-10    	  188026	      6118 ns/op
+BenchmarkDeepwalkSuccess-10        	    5114	    240216 ns/op
+BenchmarkDeepwalkDefault-10        	     378	   3192538 ns/op
 PASS
-ok  	egibs/deepwalk	7.637s
+ok  	github.com/egibs/deepwalk	7.537s
 ```
 
 ## Acknowledgements
