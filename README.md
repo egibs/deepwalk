@@ -6,11 +6,9 @@
 
 The goal of `deepwalk` is to traverse an arbitrarily-nested map and retrieve the value associated with a given key. This key can be a singular key or a slice of keys with each key representing a deeper level of the map to traverse.
 
-This project was mostly done to hack on some Go after spending awhile way from it; however, I also wanted to see how much more performant Go would be with this application. 
+This project was mostly done to hack on some Go after spending awhile way from it. That said, this package is still useful aside from the "see if it works" perspective. It would be easy to specify a desired value and search the entire map, but I wanted to remain faithful to the original Python implementation.
 
-That said, this package is still useful aside from the "see if it works" perspective. It would be easy to specify a desired value and search the entire map, but I wanted to remain faithful to the original implementation.
-
-Usage examples can be found in `deepwalk_test.go`, but because code is only as good as its documentation, I'll outline some examples below.
+Usage examples can be found in `deepwalk_test.go`, but because code is only as good as its documentation, examples will be added (and added to) below.
 
 ## Installation
 
@@ -143,7 +141,7 @@ ok  	github.com/egibs/deepwalk	3.600s
 ```
 
 ## Benchmarks
-Run the three included benchmarks by running `make bench`:
+Run the included benchmarks by running `make bench`:
 ```sh
 make bench                                                                                                (deepwalk) 20:35:43
 go test -bench=.
@@ -159,10 +157,10 @@ ok  	github.com/egibs/deepwalk	7.537s
 
 ## Acknowledgements
 
-[wk8](https://github.com/wk8) for their extremely handy `go-ordered-map` [package](https://pkg.go.dev/github.com/wk8/go-ordered-map/v2@v2.1.8)
-  - I take `collections.OrderedDict` for granted in Python and this was extremely easy to implement
+[wk8](https://github.com/wk8) for their extremely handy [go-ordered-map](https://pkg.go.dev/github.com/wk8/go-ordered-map/v2@v2.1.8) package
+  - It is easy to take `collections.OrderedDict` for granted in Python and this was extremely easy to implement
 
 ## TODO
 
-For now, I really just wanted to publish my first Go package since I'd never done that. Eventually I may add a `GoReleaser` Workflow to this repository
-I do want to make a version that locates a desired value, if present, in a map.
+- For now, the functionality of the package is the primary goal, but eventually more robust examples, functionality, and documentation are on the table
+- Adding a `GoReleaser` Workflow and tweaking the package to account for that is potentially worth doing as well
