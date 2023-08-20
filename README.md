@@ -1,5 +1,7 @@
 # deepwalk
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/egibs/deepwalk.svg)](https://pkg.go.dev/github.com/egibs/deepwalk)
+
 ## Overview
 
 `deepwalk` is a Golang implementation of the code documented [here](https://egibs.xyz/posts/technical/deep_walk/) which was originally written in Python.
@@ -154,6 +156,19 @@ BenchmarkDeepwalkDefault-10        	     378	   3192538 ns/op
 PASS
 ok  	github.com/egibs/deepwalk	7.537s
 ```
+
+## Miscellaneous
+
+### Manually cutting a release
+
+To cut a release for this package, do the following:
+- Update the `VERSION` file
+  - For now this is aesthetic but offers an easy way to reference the version outside of GitHub
+- Update `CHANGELOG.md` with a new entry matching the new version
+- Commit and push any changes to `main` (either directly or via  PR)
+- Run `git tag vX.Y.Z`
+- Run `git push origin --tags`
+- Create a new release using the new tag
 
 ## Acknowledgements
 
