@@ -40,6 +40,20 @@ var exampleJSON = []byte(`{
 	}
 }`)
 
+var exampleMap = map[string]interface{}{
+	"key": map[string]interface{}{
+		"inner_key": []interface{}{
+			[]interface{}{
+				[]interface{}{
+					map[string]interface{}{
+						"very_nested_key": "very_nested_value",
+					},
+				},
+			},
+		},
+	},
+}
+
 func TestDeepwalkMinimalJSON(t *testing.T) {
 	var object map[string]interface{}
 	err := json.Unmarshal(exampleJSON, &object)
@@ -48,6 +62,17 @@ func TestDeepwalkMinimalJSON(t *testing.T) {
 	}
 	want := "foo"
 	values, err := DeepWalk(object, []string{"a", "b", "e", "f"}, "<NO_VALUE>", "all")
+	if err != nil {
+		fmt.Println(err)
+	}
+	if values != want {
+		t.Errorf("DeepWalk() = %v, want %v", values, want)
+	}
+}
+
+func TestDeepwalkMinimalMap(t *testing.T) {
+	want := "very_nested_value"
+	values, err := DeepWalk(exampleMap, []string{"key", "inner_key", "very_nested_key"}, "<NO_VALUE>", "all")
 	if err != nil {
 		fmt.Println(err)
 	}

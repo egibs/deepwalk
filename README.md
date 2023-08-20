@@ -30,9 +30,10 @@ import (
 
 The original use-case for this in Python was to traverse Python dictionaries. While Golang has different names and conventions for this, the approach remains the same.
 
+### JSON
 Given a simple JSON object like this:
 ```go
-exampleJSON := []byte(`{
+var exampleJSON = []byte(`{
     "key": [
         {
             "inner_key": "value"
@@ -63,6 +64,30 @@ To add some color to the aruguments used when calling `DeepWalk` --
 * `all` specifies the values to return, if found
   * `first` and `last` are also available which will return the first and last found values, respectively
 
+### Maps
+
+Maps can be used directly as well (this example is taken from the tests) --
+```go
+var exampleMap = map[string]interface{}{
+	"key": map[string]interface{}{
+		"inner_key": []interface{}{
+			[]interface{}{
+				[]interface{}{
+					map[string]interface{}{
+						"very_nested_key": "very_nested_value",
+					},
+				},
+			},
+		},
+	},
+}
+values, err := DeepWalk(exampleMap, []string{"key", "inner_key", "very_nested_key"}, "<NO_VALUE>", "all")
+if err != nil {
+    fmt.Println(err)
+}
+fmt.Println(value)
+```
+
 ## Testing
 Several categories of tests are included:
 1. A manual JSON object
@@ -77,6 +102,8 @@ Run all of the included tests by running `make test`:
 go test ./... -v
 === RUN   TestDeepwalkMinimalJSON
 --- PASS: TestDeepwalkMinimalJSON (0.00s)
+=== RUN   TestDeepwalkMinimalMap
+--- PASS: TestDeepwalkMinimalMap (0.00s)
 === RUN   TestDeepWalk
 === RUN   TestDeepWalk/Test_case_1_-_empty_object
 === RUN   TestDeepWalk/Test_case_2_-_empty_keys
@@ -108,11 +135,11 @@ go test ./... -v
     --- PASS: TestDeepWalk/Test_case_13_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
     --- PASS: TestDeepWalk/Test_case_14_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
 === RUN   TestDeepwalkRandomSuccess
---- PASS: TestDeepwalkRandomSuccess (0.27s)
+--- PASS: TestDeepwalkRandomSuccess (0.25s)
 === RUN   TestDeepwalkRandomDefault
---- PASS: TestDeepwalkRandomDefault (3.12s)
+--- PASS: TestDeepwalkRandomDefault (3.22s)
 PASS
-ok  	github.com/egibs/deepwalk	3.590s
+ok  	github.com/egibs/deepwalk	3.600s
 ```
 
 ## Benchmarks
