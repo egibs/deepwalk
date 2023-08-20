@@ -1,0 +1,22 @@
+name: deepwalk CI
+
+on:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file:: '.go-version'
+      - name: go mod tidy
+        run:
+          make tidy
+      - name: Run tests
+        run:
+          make test
+      - name: Run benchmarks
+        run:
+          make bench
