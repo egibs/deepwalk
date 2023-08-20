@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 0.2.4 - 2023/08/20
+
+- Add SBOM and `make sbom` target
+
 ## 0.2.3 - 2023/08/20
 
 - Add `make pkg` target

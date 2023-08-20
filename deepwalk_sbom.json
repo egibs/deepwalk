@@ -1,0 +1,304 @@
+{
+ "artifacts": [
+  {
+   "id": "e1adbff4097daee7",
+   "name": "github.com/bahlo/generic-list-go",
+   "version": "v0.2.0",
+   "type": "go-module",
+   "foundBy": "go-mod-file-cataloger",
+   "locations": [
+    {
+     "path": "/go.mod",
+     "annotations": {
+      "evidence": "primary"
+     }
+    }
+   ],
+   "licenses": [],
+   "language": "go",
+   "cpes": [
+    "cpe:2.3:a:bahlo:generic-list-go:v0.2.0:*:*:*:*:*:*:*",
+    "cpe:2.3:a:bahlo:generic_list_go:v0.2.0:*:*:*:*:*:*:*"
+   ],
+   "purl": "pkg:golang/github.com/bahlo/generic-list-go@v0.2.0",
+   "metadataType": "GolangModMetadata",
+   "metadata": {
+    "h1Digest": "h1:5sz/EEAK+ls5wF+NeqDpk5+iNdMDXrh3z3nPnH1Wvgk="
+   }
+  },
+  {
+   "id": "b5428382b933e5cd",
+   "name": "github.com/buger/jsonparser",
+   "version": "v1.1.1",
+   "type": "go-module",
+   "foundBy": "go-mod-file-cataloger",
+   "locations": [
+    {
+     "path": "/go.mod",
+     "annotations": {
+      "evidence": "primary"
+     }
+    }
+   ],
+   "licenses": [],
+   "language": "go",
+   "cpes": [
+    "cpe:2.3:a:buger:jsonparser:v1.1.1:*:*:*:*:*:*:*"
+   ],
+   "purl": "pkg:golang/github.com/buger/jsonparser@v1.1.1",
+   "metadataType": "GolangModMetadata",
+   "metadata": {
+    "h1Digest": "h1:2PnMjfWD7wBILjqQbt530v576A/cAbQvEW9gGIpYMUs="
+   }
+  },
+  {
+   "id": "c0a6f06cfa5623db",
+   "name": "github.com/mailru/easyjson",
+   "version": "v0.7.7",
+   "type": "go-module",
+   "foundBy": "go-mod-file-cataloger",
+   "locations": [
+    {
+     "path": "/go.mod",
+     "annotations": {
+      "evidence": "primary"
+     }
+    }
+   ],
+   "licenses": [],
+   "language": "go",
+   "cpes": [
+    "cpe:2.3:a:mailru:easyjson:v0.7.7:*:*:*:*:*:*:*"
+   ],
+   "purl": "pkg:golang/github.com/mailru/easyjson@v0.7.7",
+   "metadataType": "GolangModMetadata",
+   "metadata": {
+    "h1Digest": "h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0="
+   }
+  },
+  {
+   "id": "1bd6c24db74fc875",
+   "name": "github.com/wk8/go-ordered-map/v2",
+   "version": "v2.1.8",
+   "type": "go-module",
+   "foundBy": "go-mod-file-cataloger",
+   "locations": [
+    {
+     "path": "/go.mod",
+     "annotations": {
+      "evidence": "primary"
+     }
+    }
+   ],
+   "licenses": [],
+   "language": "go",
+   "cpes": [
+    "cpe:2.3:a:wk8:go-ordered-map\\/v2:v2.1.8:*:*:*:*:*:*:*",
+    "cpe:2.3:a:wk8:go_ordered_map\\/v2:v2.1.8:*:*:*:*:*:*:*"
+   ],
+   "purl": "pkg:golang/github.com/wk8/go-ordered-map/v2@v2.1.8",
+   "metadataType": "GolangModMetadata",
+   "metadata": {
+    "h1Digest": "h1:5h/BUHu93oj4gIdvHHHGsScSTMijfx5PeYkE/fJgbpc="
+   }
+  },
+  {
+   "id": "68998413e613579b",
+   "name": "gopkg.in/yaml.v3",
+   "version": "v3.0.1",
+   "type": "go-module",
+   "foundBy": "go-mod-file-cataloger",
+   "locations": [
+    {
+     "path": "/go.mod",
+     "annotations": {
+      "evidence": "primary"
+     }
+    }
+   ],
+   "licenses": [],
+   "language": "go",
+   "cpes": [],
+   "purl": "pkg:golang/gopkg.in/yaml.v3@v3.0.1",
+   "metadataType": "GolangModMetadata",
+   "metadata": {
+    "h1Digest": "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA="
+   }
+  }
+ ],
+ "artifactRelationships": [
+  {
+   "parent": "1bd6c24db74fc875",
+   "child": "3fc5a8d3d86e9790",
+   "type": "evident-by"
+  },
+  {
+   "parent": "68998413e613579b",
+   "child": "3fc5a8d3d86e9790",
+   "type": "evident-by"
+  },
+  {
+   "parent": "b5428382b933e5cd",
+   "child": "3fc5a8d3d86e9790",
+   "type": "evident-by"
+  },
+  {
+   "parent": "c0a6f06cfa5623db",
+   "child": "3fc5a8d3d86e9790",
+   "type": "evident-by"
+  },
+  {
+   "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+   "child": "1bd6c24db74fc875",
+   "type": "contains"
+  },
+  {
+   "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+   "child": "68998413e613579b",
+   "type": "contains"
+  },
+  {
+   "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+   "child": "b5428382b933e5cd",
+   "type": "contains"
+  },
+  {
+   "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+   "child": "c0a6f06cfa5623db",
+   "type": "contains"
+  },
+  {
+   "parent": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+   "child": "e1adbff4097daee7",
+   "type": "contains"
+  },
+  {
+   "parent": "e1adbff4097daee7",
+   "child": "3fc5a8d3d86e9790",
+   "type": "evident-by"
+  }
+ ],
+ "files": [
+  {
+   "id": "3fc5a8d3d86e9790",
+   "location": {
+    "path": "/go.mod"
+   }
+  }
+ ],
+ "source": {
+  "id": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+  "name": ".",
+  "version": "",
+  "type": "directory",
+  "metadata": {
+   "path": "."
+  }
+ },
+ "distro": {},
+ "descriptor": {
+  "name": "syft",
+  "version": "0.87.1",
+  "configuration": {
+   "configPath": "",
+   "verbosity": 0,
+   "quiet": false,
+   "output": [
+    "json"
+   ],
+   "output-template-path": "",
+   "file": "",
+   "check-for-app-update": true,
+   "dev": {
+    "profile-cpu": false,
+    "profile-mem": false
+   },
+   "log": {
+    "structured": false,
+    "level": "warn",
+    "file-location": ""
+   },
+   "catalogers": null,
+   "package": {
+    "cataloger": {
+     "enabled": true,
+     "scope": "Squashed"
+    },
+    "search-unindexed-archives": false,
+    "search-indexed-archives": true
+   },
+   "golang": {
+    "search-local-mod-cache-licenses": false,
+    "local-mod-cache-dir": "",
+    "search-remote-licenses": false,
+    "proxy": "",
+    "no-proxy": ""
+   },
+   "linux-kernel": {
+    "catalog-modules": true
+   },
+   "python": {
+    "guess-unpinned-requirements": false
+   },
+   "attest": {},
+   "file-metadata": {
+    "cataloger": {
+     "enabled": false,
+     "scope": "Squashed"
+    },
+    "digests": [
+     "sha256"
+    ]
+   },
+   "file-classification": {
+    "cataloger": {
+     "enabled": false,
+     "scope": "Squashed"
+    }
+   },
+   "file-contents": {
+    "cataloger": {
+     "enabled": false,
+     "scope": "Squashed"
+    },
+    "skip-files-above-size": 1048576,
+    "globs": []
+   },
+   "secrets": {
+    "cataloger": {
+     "enabled": false,
+     "scope": "AllLayers"
+    },
+    "additional-patterns": {},
+    "exclude-pattern-names": [],
+    "reveal-values": false,
+    "skip-files-above-size": 1048576
+   },
+   "registry": {
+    "insecure-skip-tls-verify": false,
+    "insecure-use-http": false,
+    "auth": []
+   },
+   "exclude": [],
+   "platform": "",
+   "name": "",
+   "source": {
+    "name": "",
+    "version": "",
+    "file": {
+     "digests": [
+      "sha256"
+     ]
+    }
+   },
+   "parallelism": 1,
+   "default-image-pull-source": "",
+   "base-path": "",
+   "exclude-binary-overlap-by-ownership": true
+  }
+ },
+ "schema": {
+  "version": "10.0.0",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-10.0.0.json"
+ }
+}
