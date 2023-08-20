@@ -32,7 +32,7 @@ The original use-case for this in Python was to traverse Python dictionaries. Wh
 
 Given a simple JSON object like this:
 ```go
-exampleJson = []byte(`{
+exampleJSON := []byte(`{
     "key": [
         {
             "inner_key": "value"
