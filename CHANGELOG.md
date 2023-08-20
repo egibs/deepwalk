@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 0.2.3 - 2023/08/20
+
+- Add `make pkg` target
+
 ## 0.2.2 - 2023/08/20
 
 - Add badge and release cutting instructions

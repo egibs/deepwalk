@@ -14,6 +14,9 @@ clean-test:
 
 clean-all: clean-mod clean-test
 
+pkg:
+	curl https://sum.golang.org/lookup/github.com/egibs/deepwalk@v$(shell cat VERSION)
+
 test:
 	go test ./... -v
 
