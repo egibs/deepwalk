@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 0.3.0 - 2023/09/11
+
+- Update to Go1.21
+
 ## 0.2.5 - 2023/08/20
 
 - Fix CI Workflow
