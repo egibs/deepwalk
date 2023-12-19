@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 0.3.1 - 2023/12/19
+
+- Minor updates
+
 ## 0.3.0 - 2023/09/11
 
 - Update to Go1.21
