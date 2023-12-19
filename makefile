@@ -18,7 +18,7 @@ pkg:
 	curl https://sum.golang.org/lookup/github.com/egibs/deepwalk@v$(shell cat VERSION)
 
 sbom:
-	syft . -o json > deepwalk_sbom.json
+	syft . -o json | jq . > deepwalk_sbom.json
 
 test:
 	go test ./... -v
