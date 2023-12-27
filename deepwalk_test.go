@@ -277,35 +277,8 @@ func TestDeepWalk(t *testing.T) {
 			want:    "default",
 			wantErr: false,
 		},
-		{
-			name: "Test case 13 - array of maps with multiple matching keys, return default",
-			args: args{
-				obj: []interface{}{
-					map[string]interface{}{"key1": "value1", "key2": "value2"},
-					map[string]interface{}{"key1": "value3", "key2": "value4"},
-				},
-				keys:       []string{"key5"},
-				defaultVal: "default",
-				returnVal:  "first",
-			},
-			want:    "default",
-			wantErr: false,
-		},
-		{
-			name: "Test case 14 - array of maps with multiple matching keys, return default",
-			args: args{
-				obj: []interface{}{
-					map[string]interface{}{"key1": "value1", "key2": "value2"},
-					map[string]interface{}{"key1": "value3", "key2": "value4"},
-				},
-				keys:       []string{"key5"},
-				defaultVal: "default",
-				returnVal:  "first",
-			},
-			want:    "default",
-			wantErr: false,
-		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := DeepWalk(tt.args.obj, tt.args.keys, tt.args.defaultVal, tt.args.returnVal)
@@ -368,6 +341,106 @@ func TestDeepwalkRandomDefault(t *testing.T) {
 		if !reflect.DeepEqual(got, "default") {
 			t.Errorf("DeepWalk() = %v, want %v", got, "default")
 		}
+	}
+}
+
+func TestDeepWalkWithStruct(t *testing.T) {
+	type TestStruct struct {
+		Field1       string
+		Field2       int
+		NestedStruct struct {
+			NestedStruct2 struct {
+				NestedField1 string
+				NestedField2 int
+			}
+			NestedField1 string
+			NestedField2 int
+		}
+	}
+
+	testStruct := TestStruct{
+		Field1: "test",
+		Field2: 123,
+		NestedStruct: struct {
+			NestedStruct2 struct {
+				NestedField1 string
+				NestedField2 int
+			}
+			NestedField1 string
+			NestedField2 int
+		}{
+			NestedStruct2: struct {
+				NestedField1 string
+				NestedField2 int
+			}{
+				NestedField1: "nested",
+				NestedField2: 456,
+			},
+			NestedField1: "nested",
+			NestedField2: 456,
+		},
+	}
+
+	tests := []struct {
+		name       string
+		keys       []string
+		defaultVal interface{}
+		returnVal  string
+		want       interface{}
+	}{
+		{
+			name:       "Test Field1",
+			keys:       []string{"Field1"},
+			defaultVal: "default",
+			returnVal:  "first",
+			want:       "test",
+		},
+		{
+			name:       "Test Field2",
+			keys:       []string{"Field2"},
+			defaultVal: "default",
+			returnVal:  "first",
+			want:       123,
+		},
+		{
+			name:       "Test NestedField1",
+			keys:       []string{"NestedStruct", "NestedField1"},
+			defaultVal: "default",
+			returnVal:  "first",
+			want:       "nested",
+		},
+		{
+			name:       "Test NestedField2",
+			keys:       []string{"NestedStruct", "NestedField2"},
+			defaultVal: "default",
+			returnVal:  "first",
+			want:       456,
+		},
+		{
+			name:       "Test Second-level NestedField1",
+			keys:       []string{"NestedStruct", "NestedStruct2", "NestedField1"},
+			defaultVal: "default",
+			returnVal:  "first",
+			want:       "nested",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			defaultVal, ok := tt.defaultVal.(string)
+			if !ok {
+				t.Errorf("defaultVal is not a string")
+				return
+			}
+			got, err := DeepWalk(testStruct, tt.keys, defaultVal, tt.returnVal)
+			if err != nil {
+				t.Errorf("DeepWalk() error = %v", err)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("DeepWalk() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
 

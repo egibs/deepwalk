@@ -278,7 +278,7 @@
   "distro": {},
   "descriptor": {
     "name": "syft",
-    "version": "0.98.0",
+    "version": "0.99.0",
     "configuration": {
       "catalogers": null,
       "package": {
@@ -300,6 +300,10 @@
         "use-network": false,
         "maven-url": "",
         "max-parent-recursive-depth": 0
+      },
+      "javascript": {
+        "search-remote-licenses": false,
+        "npm-base-url": ""
       },
       "linux-kernel": {
         "catalog-modules": true

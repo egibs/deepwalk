@@ -23,7 +23,7 @@ func RandomInt(min, max int64) (int64, error) {
 
 // RandomString generate random string based on a length argument
 func RandomString(length int) (string, error) {
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	letters := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	s := make([]rune, length)
 	for i := range s {
 		randomIndex, err := RandomInt(1, int64(len(letters)))
