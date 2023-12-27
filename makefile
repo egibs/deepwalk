@@ -25,3 +25,6 @@ test:
 
 tidy:
 	go mod tidy
+
+fmt:
+	go fmt ./...
