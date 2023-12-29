@@ -6,6 +6,8 @@ import (
 	"math/rand"
 	"reflect"
 	"testing"
+
+	util "github.com/egibs/deepwalk/internal/util"
 )
 
 const (
@@ -298,14 +300,14 @@ func defaultCases(depth, maxDepth int) (interface{}, []string, error) {
 	nonexistentKeys := make([]string, rand.Intn(maxDepth)+1)
 	for i := range nonexistentKeys {
 		for j := 0; j < rand.Intn(100)+1; j++ {
-			randomValue, err := RandomString(16)
+			randomValue, err := util.RandomString(16)
 			if err != nil {
 				return nil, nil, err
 			}
 			nonexistentKeys[i] = randomValue
 		}
 	}
-	data, _, err := DefaultCases(depth, maxDepth)
+	data, _, err := util.DefaultCases(depth, maxDepth)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -314,7 +316,7 @@ func defaultCases(depth, maxDepth int) (interface{}, []string, error) {
 
 func TestDeepwalkRandomSuccess(t *testing.T) {
 	for i := 0; i < maxRuns; i++ {
-		data, keys, expected, err := SucessCases(nil, maxDepth)
+		data, keys, expected, err := util.SucessCases(nil, util.MaxDepth)
 		if err != nil {
 			t.Errorf("SucessCases() error = %v", err)
 		}
@@ -330,7 +332,7 @@ func TestDeepwalkRandomSuccess(t *testing.T) {
 
 func TestDeepwalkRandomDefault(t *testing.T) {
 	for i := 0; i < maxRuns; i++ {
-		data, nonexistentKeys, err := defaultCases(0, maxDepth)
+		data, nonexistentKeys, err := defaultCases(0, util.MaxDepth)
 		if err != nil {
 			t.Errorf("defaultCases() error = %v", err)
 		}
@@ -446,7 +448,7 @@ func TestDeepWalkWithStruct(t *testing.T) {
 
 func BenchmarkDeepwalkSuccess(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		data, keys, expected, err := SucessCases(nil, maxDepth)
+		data, keys, expected, err := util.SucessCases(nil, util.MaxDepth)
 		if err != nil {
 			b.Errorf("SucessCases() error = %v", err)
 		}
@@ -462,7 +464,7 @@ func BenchmarkDeepwalkSuccess(b *testing.B) {
 
 func BenchmarkDeepwalkDefault(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		data, nonexistentKeys, err := defaultCases(0, maxDepth)
+		data, nonexistentKeys, err := defaultCases(0, util.MaxDepth)
 		if err != nil {
 			b.Errorf("defaultCases() error = %v", err)
 		}

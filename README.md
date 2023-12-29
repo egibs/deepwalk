@@ -225,18 +225,24 @@ ok  	github.com/egibs/deepwalk	3.529s
 Run the included benchmarks by running `make bench`:
 ```sh
 ❯ make bench
-go test -bench=.
+go test ./... -bench=. -benchmem
 goos: darwin
 goarch: arm64
-pkg: github.com/egibs/deepwalk
-BenchmarkDeepSearch-10             	 3037286	       401.9 ns/op
-BenchmarkDeepsearchSuccess-10      	    4652	    237350 ns/op
-BenchmarkDeepsearchDefault-10      	     369	   3173644 ns/op
-BenchmarkDeepwalkMinimalJSON-10    	  183658	      6517 ns/op
-BenchmarkDeepwalkSuccess-10        	    4838	    244879 ns/op
-BenchmarkDeepwalkDefault-10        	     370	   3284312 ns/op
+pkg: github.com/egibs/deepwalk/internal/deepsearch
+BenchmarkDeepSearch-10           	 5994662	       192.9 ns/op	      32 B/op	       2 allocs/op
+BenchmarkDeepsearchSuccess-10    	    5256	    236388 ns/op	   26755 B/op	    1525 allocs/op
+BenchmarkDeepsearchDefault-10    	     483	   2583260 ns/op	  297127 B/op	   16770 allocs/op
 PASS
-ok  	github.com/egibs/deepwalk	11.752s
+ok  	github.com/egibs/deepwalk/internal/deepsearch	4.219s
+goos: darwin
+goarch: arm64
+pkg: github.com/egibs/deepwalk/internal/deepwalk
+BenchmarkDeepwalkMinimalJSON-10    	  278197	      4255 ns/op	    3648 B/op	      65 allocs/op
+BenchmarkDeepwalkSuccess-10        	    4948	    236118 ns/op	   26593 B/op	    1516 allocs/op
+BenchmarkDeepwalkDefault-10        	     382	   3133330 ns/op	  355802 B/op	   20192 allocs/op
+PASS
+ok  	github.com/egibs/deepwalk/internal/deepwalk	7.579s
+?   	github.com/egibs/deepwalk/internal/util	[no test files]
 ```
 
 ## Miscellaneous
@@ -251,11 +257,6 @@ To cut a release for this package, do the following:
 - Run `git tag vX.Y.Z`
 - Run `git push origin --tags`
 - Create a new release using the new tag
-
-## Acknowledgements
-
-[wk8](https://github.com/wk8) for their extremely handy [go-ordered-map](https://pkg.go.dev/github.com/wk8/go-ordered-map/v2@v2.1.8) package
-  - It is easy to take `collections.OrderedDict` for granted in Python and this was extremely easy to implement
 
 ## TODO
 

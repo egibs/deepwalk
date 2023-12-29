@@ -1,4 +1,4 @@
-package deepwalk
+package util
 
 import (
 	"crypto/rand"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var maxDepth = 10
+var MaxDepth = 10
 
 // IsEmpty checks if the specified object is empty
 func IsEmpty(subObj interface{}) bool {
@@ -161,7 +161,7 @@ func SucessCases(keys []string, depth int) (map[string]interface{}, []string, in
 	for k := range kvPair {
 		key = k
 	}
-	if depth == maxDepth {
+	if depth == MaxDepth {
 		return kvPair, append(keys, key), kvPair[key], nil
 	}
 	nested, keys, expected, err := SucessCases(append(keys, key), depth+1)

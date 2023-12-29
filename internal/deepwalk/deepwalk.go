@@ -3,7 +3,7 @@ package deepwalk
 import (
 	"reflect"
 
-	orderedmap "github.com/wk8/go-ordered-map/v2"
+	util "github.com/egibs/deepwalk/internal/util"
 )
 
 // DeepWalk traverses a map object and returns the value of the specified key
@@ -19,7 +19,7 @@ func DeepWalk(
 	returnVal string,
 ) (interface{}, error) {
 	// Return the default value if the object is empty or if the keys or return value are invalid
-	if IsEmpty(obj) || !ValidKeys(keys) || !ValidReturnVal(returnVal) {
+	if util.IsEmpty(obj) || !util.ValidKeys(keys) || !util.ValidReturnVal(returnVal) {
 		return defaultVal, nil
 	}
 
@@ -29,7 +29,6 @@ func DeepWalk(
 	}
 
 	currentKey := keys[0]
-	found := orderedmap.New[string, struct{}]()
 	var foundList []interface{}
 
 	r := reflect.ValueOf(obj)
@@ -41,14 +40,10 @@ func DeepWalk(
 	case map[string]interface{}:
 		return deepWalkMap(object, currentKey, keys, defaultVal, returnVal)
 	case []interface{}:
-		return deepWalkSlice(object, keys, defaultVal, returnVal, found, &foundList)
+		return deepWalkSlice(object, keys, defaultVal, returnVal, &foundList)
 	}
 
-	for kv := found.Oldest(); kv != nil; kv = kv.Next() {
-		foundList = append(foundList, kv.Key)
-	}
-
-	return HandleReturnVal(&foundList, defaultVal, returnVal)
+	return util.HandleReturnVal(&foundList, defaultVal, returnVal)
 }
 
 // handleStruct handles the case where the object is a struct
@@ -87,7 +82,6 @@ func deepWalkSlice(
 	keys []string,
 	defaultVal string,
 	returnVal string,
-	found *orderedmap.OrderedMap[string, struct{}],
 	foundList *[]interface{},
 ) (interface{}, error) {
 	for _, item := range object {
@@ -96,10 +90,9 @@ func deepWalkSlice(
 			return defaultVal, err
 		}
 		if val != defaultVal {
-			found.Set(val.(string), struct{}{})
-			*foundList = append(*foundList, val.(string))
+			*foundList = append(*foundList, val)
 		}
 	}
 
-	return HandleReturnVal(foundList, defaultVal, returnVal)
+	return util.HandleReturnVal(foundList, defaultVal, returnVal)
 }
