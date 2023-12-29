@@ -89,7 +89,7 @@ func BenchmarkDeepwalkMinimalJSON(b *testing.B) {
 	}
 	want := map[int]interface{}{
 		1: "foo",
-		2: []string{"foo", "bar", "baz"},
+		2: []interface{}{"foo", "bar", "baz"},
 		3: "<NO_VALUE>",
 	}
 	for i := 0; i < b.N; i++ {
@@ -232,7 +232,7 @@ func TestDeepWalk(t *testing.T) {
 				defaultVal: "default",
 				returnVal:  "all",
 			},
-			want:    []string{"value1", "value3"},
+			want:    []interface{}{"value1", "value3"},
 			wantErr: false,
 		},
 		{
