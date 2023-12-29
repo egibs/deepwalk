@@ -24,13 +24,29 @@ go get -u github.com/egibs/deepwalk
 Import `deepwalk` like so:
 ```go
 import (
-    "github.com/egibs/deepwalk"
+    "github.com/egibs/deepwalk/pkg/deepwalk"
+)
+```
+
+Import `deepsearch` like so:
+```go
+import (
+    "github.com/egibs/deepwalk/pkg/deepsearch"
 )
 ```
 
 ## Examples
 
 The original use-case for this in Python was to traverse Python dictionaries. While Golang has different names and conventions for this, the approach remains the same.
+
+### `main.go`
+
+Two basic examples are provided in `main.go` --
+```
+❯ go run main.go
+Value should be 'foo': foo
+Value2 should be '[foo bar baz]': [foo bar baz]
+```
 
 ### JSON
 Given a simple JSON object like this:
@@ -51,7 +67,7 @@ err := json.Unmarshal(exampleJSON, &object)
 if err != nil {
     fmt.Println(err)
 }
-value, err := DeepWalk(object, []string{"key", "inner_key"}, "<NO_VALUE>", "all")
+value, err := deepwalk.DeepWalk(object, []string{"key", "inner_key"}, "<NO_VALUE>", "all")
 if err != nil {
     fmt.Println(err)
 }
@@ -83,7 +99,7 @@ var exampleMap = map[string]interface{}{
 		},
 	},
 }
-values, err := DeepWalk(exampleMap, []string{"key", "inner_key", "very_nested_key"}, "<NO_VALUE>", "all")
+values, err := deepwalk.DeepWalk(exampleMap, []string{"key", "inner_key", "very_nested_key"}, "<NO_VALUE>", "all")
 if err != nil {
     fmt.Println(err)
 }
@@ -130,7 +146,7 @@ testStruct := TestStruct{
     },
 }
 
-values, err := DeepWalk(testStruct, []string{"NestedStruct", "NestedStruct2", "NestedField1"}, "<NO_VALUE>", "all")
+values, err := deepwalk.DeepWalk(testStruct, []string{"NestedStruct", "NestedStruct2", "NestedField1"}, "<NO_VALUE>", "all")
 if err != nil {
     fmt.Println(err)
 }
