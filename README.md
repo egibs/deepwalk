@@ -18,7 +18,7 @@ Additionally, a naive search method is also provided via `DeepSearch`. This meth
 
 To install `deepwalk`, run the following:
 ```sh
-go get -u github.com/egibs/deepwalk
+go install github.com/egibs/deepwalk@latest
 ```
 
 Import `deepwalk` like so:
