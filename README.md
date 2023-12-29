@@ -224,16 +224,19 @@ ok  	github.com/egibs/deepwalk	3.529s
 ## Benchmarks
 Run the included benchmarks by running `make bench`:
 ```sh
-make bench                                                                                                (deepwalk) 20:35:43
+❯ make bench
 go test -bench=.
 goos: darwin
 goarch: arm64
 pkg: github.com/egibs/deepwalk
-BenchmarkDeepwalkMinimalJSON-10    	  188026	      6118 ns/op
-BenchmarkDeepwalkSuccess-10        	    5114	    240216 ns/op
-BenchmarkDeepwalkDefault-10        	     378	   3192538 ns/op
+BenchmarkDeepSearch-10             	 3037286	       401.9 ns/op
+BenchmarkDeepsearchSuccess-10      	    4652	    237350 ns/op
+BenchmarkDeepsearchDefault-10      	     369	   3173644 ns/op
+BenchmarkDeepwalkMinimalJSON-10    	  183658	      6517 ns/op
+BenchmarkDeepwalkSuccess-10        	    4838	    244879 ns/op
+BenchmarkDeepwalkDefault-10        	     370	   3284312 ns/op
 PASS
-ok  	github.com/egibs/deepwalk	7.537s
+ok  	github.com/egibs/deepwalk	11.752s
 ```
 
 ## Miscellaneous
