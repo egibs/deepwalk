@@ -168,3 +168,35 @@ func BenchmarkDeepSearch(b *testing.B) {
 		}
 	}
 }
+
+func BenchmarkDeepsearchSuccess(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		data, keys, expected, err := SucessCases(nil, maxDepth)
+		if err != nil {
+			b.Errorf("SucessCases() error = %v", err)
+		}
+		have, err := DeepWalk(data, []string{keys[len(keys)-1]}, "default", "all")
+		if err != nil {
+			b.Errorf("DeepWalk() error = %v", err)
+		}
+		if !reflect.DeepEqual(have, expected) {
+			b.Errorf("DeepWalk() = %v, want %v", have, expected)
+		}
+	}
+}
+
+func BenchmarkDeepsearchDefault(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		data, nonexistentKeys, err := defaultCases(0, maxDepth)
+		if err != nil {
+			b.Errorf("defaultCases() error = %v", err)
+		}
+		have, err := DeepWalk(data, []string{nonexistentKeys[len(nonexistentKeys)-1]}, "default", "all")
+		if err := err; err != nil {
+			b.Errorf("DeepWalk() error = %v", err)
+		}
+		if !reflect.DeepEqual(have, "default") {
+			b.Errorf("DeepWalk() = %v, want %v", have, "default")
+		}
+	}
+}
