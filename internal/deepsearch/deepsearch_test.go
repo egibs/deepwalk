@@ -1,8 +1,10 @@
-package deepwalk
+package deepsearch
 
 import (
 	"reflect"
 	"testing"
+
+	util "github.com/egibs/deepwalk/internal/util"
 )
 
 func TestDeepSearch(t *testing.T) {
@@ -161,42 +163,42 @@ func BenchmarkDeepSearch(b *testing.B) {
 		have, err := DeepSearch(obj, "key5", "default", "first")
 		expected := "value5"
 		if err != nil {
-			b.Errorf("DeepWalk() error = %v", err)
+			b.Errorf("DeepSearch() error = %v", err)
 		}
 		if !reflect.DeepEqual(have, expected) {
-			b.Errorf("DeepWalk() = %v, want %v", have, expected)
+			b.Errorf("DeepSearch() = %v, want %v", have, expected)
 		}
 	}
 }
 
 func BenchmarkDeepsearchSuccess(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		data, keys, expected, err := SucessCases(nil, maxDepth)
+		data, keys, expected, err := util.SucessCases(nil, util.MaxDepth)
 		if err != nil {
 			b.Errorf("SucessCases() error = %v", err)
 		}
-		have, err := DeepWalk(data, []string{keys[len(keys)-1]}, "default", "all")
+		have, err := DeepSearch(data, keys[len(keys)-1], "default", "all")
 		if err != nil {
-			b.Errorf("DeepWalk() error = %v", err)
+			b.Errorf("DeepSearch() error = %v", err)
 		}
 		if !reflect.DeepEqual(have, expected) {
-			b.Errorf("DeepWalk() = %v, want %v", have, expected)
+			b.Errorf("DeepSearch() = %v, want %v", have, expected)
 		}
 	}
 }
 
 func BenchmarkDeepsearchDefault(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		data, nonexistentKeys, err := defaultCases(0, maxDepth)
+		data, _, err := util.DefaultCases(0, util.MaxDepth)
 		if err != nil {
 			b.Errorf("defaultCases() error = %v", err)
 		}
-		have, err := DeepWalk(data, []string{nonexistentKeys[len(nonexistentKeys)-1]}, "default", "all")
+		have, err := DeepSearch(data, "", "default", "all")
 		if err := err; err != nil {
-			b.Errorf("DeepWalk() error = %v", err)
+			b.Errorf("DeepSearch() error = %v", err)
 		}
 		if !reflect.DeepEqual(have, "default") {
-			b.Errorf("DeepWalk() = %v, want %v", have, "default")
+			b.Errorf("DeepSearch() = %v, want %v", have, "default")
 		}
 	}
 }

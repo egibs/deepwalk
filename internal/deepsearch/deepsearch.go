@@ -1,9 +1,9 @@
-package deepwalk
+package deepsearch
 
 import (
 	"reflect"
 
-	orderedmap "github.com/wk8/go-ordered-map/v2"
+	util "github.com/egibs/deepwalk/internal/util"
 )
 
 // DeepSearch traverses a data structure and returns the value of the specified key
@@ -17,35 +17,32 @@ func DeepSearch(
 	returnVal string,
 ) (interface{}, error) {
 	// Return the default value if the object is empty or if the keys or return value are invalid
-	if IsEmpty(obj) || !ValidKeys([]string{searchKey}) || !ValidReturnVal(returnVal) {
+	if util.IsEmpty(obj) || searchKey == "" || !util.ValidReturnVal(returnVal) {
 		return defaultVal, nil
 	}
 
-	// Return the object if there are no keys to traverse
-	if len(searchKey) == 0 {
-		return obj, nil
-	}
-
-	found := orderedmap.New[string, struct{}]()
 	var foundList []interface{}
-	for kv := found.Oldest(); kv != nil; kv = kv.Next() {
-		foundList = append(foundList, kv.Key)
-	}
 
-	search(obj, searchKey, found, &foundList)
+	search(obj, searchKey, &foundList)
 
-	return HandleReturnVal(&foundList, defaultVal, returnVal)
+	return util.HandleReturnVal(&foundList, defaultVal, returnVal)
 }
 
 // search traverses a data structure and returns the value of the specified key
-func search(obj interface{}, searchKey string, found *orderedmap.OrderedMap[string, struct{}], foundList *[]interface{}) {
-	switch object := obj.(type) {
+func search(
+	obj interface{},
+	searchKey string,
+	foundList *[]interface{},
+) {
+	switch v := obj.(type) {
 	case map[string]interface{}:
-		deepSearchMap(object, searchKey, found, foundList)
+		deepSearchMap(v, searchKey, foundList)
 	case []interface{}:
-		deepSearchSlice(object, searchKey, found, foundList)
-	default:
-		deepSearchStruct(object, searchKey, found, foundList)
+		for _, item := range v {
+			search(item, searchKey, foundList)
+		}
+	case interface{}:
+		deepSearchStruct(v, searchKey, foundList)
 	}
 }
 
@@ -53,15 +50,21 @@ func search(obj interface{}, searchKey string, found *orderedmap.OrderedMap[stri
 func deepSearchMap(
 	obj map[string]interface{},
 	searchKey string,
-	found *orderedmap.OrderedMap[string, struct{}],
 	foundList *[]interface{},
 ) {
 	for key, value := range obj {
 		if key == searchKey {
-			found.Set(value.(string), struct{}{})
 			*foundList = append(*foundList, value)
 		}
-		search(value, searchKey, found, foundList)
+		// Recursively search in nested maps or slices
+		switch v := value.(type) {
+		case map[string]interface{}:
+			search(v, searchKey, foundList)
+		case []interface{}:
+			for _, item := range v {
+				search(item, searchKey, foundList)
+			}
+		}
 	}
 }
 
@@ -69,11 +72,10 @@ func deepSearchMap(
 func deepSearchSlice(
 	obj []interface{},
 	searchKey string,
-	found *orderedmap.OrderedMap[string, struct{}],
 	foundList *[]interface{},
 ) {
 	for _, item := range obj {
-		search(item, searchKey, found, foundList)
+		search(item, searchKey, foundList)
 	}
 }
 
@@ -81,17 +83,22 @@ func deepSearchSlice(
 func deepSearchStruct(
 	obj interface{},
 	searchKey string,
-	found *orderedmap.OrderedMap[string, struct{}],
 	foundList *[]interface{},
 ) {
 	if r := reflect.ValueOf(obj); r.Kind() == reflect.Struct {
 		for i := 0; i < r.NumField(); i++ {
 			f := r.Field(i)
 			if r.Type().Field(i).Name == searchKey {
-				found.Set(f.Interface().(string), struct{}{})
 				*foundList = append(*foundList, f.Interface())
-			} else {
-				search(f.Interface(), searchKey, found, foundList)
+			}
+			// Recursively search in nested maps, slices, or structs
+			switch v := f.Interface().(type) {
+			case map[string]interface{}, []interface{}:
+				search(v, searchKey, foundList)
+			case interface{}:
+				if reflect.TypeOf(v).Kind() == reflect.Struct {
+					search(v, searchKey, foundList)
+				}
 			}
 		}
 	}

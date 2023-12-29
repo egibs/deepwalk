@@ -1,7 +1,7 @@
 .PHONY:  bench clean-mod clean-test clean-all test tidy
 
 bench:
-	go test -bench=.
+	go test ./... -bench=. -benchmem
 
 build:
 	go build -race .
