@@ -2,7 +2,6 @@ package deepwalk
 
 import (
 	"reflect"
-	"strings"
 
 	orderedmap "github.com/wk8/go-ordered-map/v2"
 )
@@ -20,7 +19,7 @@ func DeepWalk(
 	returnVal string,
 ) (interface{}, error) {
 	// Return the default value if the object is empty or if the keys or return value are invalid
-	if isEmpty(obj) || !validKeys(keys) || !validReturnVal(returnVal) {
+	if IsEmpty(obj) || !ValidKeys(keys) || !ValidReturnVal(returnVal) {
 		return defaultVal, nil
 	}
 
@@ -31,66 +30,29 @@ func DeepWalk(
 
 	currentKey := keys[0]
 	found := orderedmap.New[string, struct{}]()
-	var foundList []string
+	var foundList []interface{}
 
 	r := reflect.ValueOf(obj)
 	if r.Kind() == reflect.Struct {
-		return handleStruct(r, currentKey, keys, defaultVal, returnVal)
+		return deepWalkStruct(r, currentKey, keys, defaultVal, returnVal)
 	}
 
 	switch object := obj.(type) {
 	case map[string]interface{}:
-		return handleMap(object, currentKey, keys, defaultVal, returnVal)
+		return deepWalkMap(object, currentKey, keys, defaultVal, returnVal)
 	case []interface{}:
-		return handleSlice(object, keys, defaultVal, returnVal, found, foundList)
+		return deepWalkSlice(object, keys, defaultVal, returnVal, found, &foundList)
 	}
 
 	for kv := found.Oldest(); kv != nil; kv = kv.Next() {
 		foundList = append(foundList, kv.Key)
 	}
 
-	return handleReturnVal(found, foundList, defaultVal, returnVal)
-}
-
-// isEmpty checks if the specified object is empty
-func isEmpty(subObj interface{}) bool {
-	switch subObject := subObj.(type) {
-	case string:
-		return false
-	case []interface{}:
-		for _, nextObj := range subObject {
-			if !isEmpty(nextObj) {
-				return false
-			}
-		}
-		return true
-	default:
-		return false
-	}
-}
-
-// validKeys checks if the specified keys are valid
-func validKeys(keys []string) bool {
-	for _, key := range keys {
-		if strings.TrimSpace(key) == "" {
-			return false
-		}
-	}
-	return true
-}
-
-// validReturnVal checks if the specified return value is valid
-func validReturnVal(returnVal string) bool {
-	switch returnVal {
-	case "first", "last", "all":
-		return true
-	default:
-		return false
-	}
+	return HandleReturnVal(&foundList, defaultVal, returnVal)
 }
 
 // handleStruct handles the case where the object is a struct
-func handleStruct(
+func deepWalkStruct(
 	r reflect.Value,
 	currentKey string,
 	keys []string,
@@ -105,7 +67,7 @@ func handleStruct(
 }
 
 // handleMap handles the case where the object is a map
-func handleMap(
+func deepWalkMap(
 	object map[string]interface{},
 	currentKey string,
 	keys []string,
@@ -120,13 +82,13 @@ func handleMap(
 }
 
 // handleSlice handles the case where the object is a slice
-func handleSlice(
+func deepWalkSlice(
 	object []interface{},
 	keys []string,
 	defaultVal string,
 	returnVal string,
 	found *orderedmap.OrderedMap[string, struct{}],
-	foundList []string,
+	foundList *[]interface{},
 ) (interface{}, error) {
 	for _, item := range object {
 		val, err := DeepWalk(item, keys, defaultVal, returnVal)
@@ -135,35 +97,9 @@ func handleSlice(
 		}
 		if val != defaultVal {
 			found.Set(val.(string), struct{}{})
-			foundList = append(foundList, val.(string))
+			*foundList = append(*foundList, val.(string))
 		}
 	}
 
-	return handleReturnVal(found, foundList, defaultVal, returnVal)
-}
-
-// handleReturnVal handles the the appropriate value to return based on the returnVal argument
-func handleReturnVal(
-	found *orderedmap.OrderedMap[string, struct{}],
-	foundList []string,
-	defaultVal string,
-	returnVal string,
-) (interface{}, error) {
-	if len(foundList) == 0 {
-		return defaultVal, nil
-	}
-
-	switch returnVal {
-	case "first":
-		return foundList[0], nil
-	case "last":
-		return foundList[len(foundList)-1], nil
-	case "all":
-		if len(foundList) == 1 {
-			return foundList[0], nil
-		}
-		return foundList, nil
-	default:
-		return defaultVal, nil
-	}
+	return HandleReturnVal(foundList, defaultVal, returnVal)
 }

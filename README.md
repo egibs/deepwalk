@@ -12,6 +12,8 @@ This project was mostly done to hack on some Go after spending awhile way from i
 
 Usage examples can be found in `deepwalk_test.go`, but because code is only as good as its documentation, examples will be added (and added to) below.
 
+Additionally, a naive search method is also provided via `DeepSearch`. This method traverses a data structure and returns all values for the provided key. This method is useful when the structure of the data is not known beforehand or can change.
+
 ## Installation
 
 To install `deepwalk`, run the following:
@@ -88,6 +90,53 @@ if err != nil {
 fmt.Println(value)
 ```
 
+### Structs
+
+Structs can also be traversed with `DeepWalk`:
+```go
+type TestStruct struct {
+    Field1       string
+    Field2       int
+    NestedStruct struct {
+        NestedStruct2 struct {
+            NestedField1 string
+            NestedField2 int
+        }
+        NestedField1 string
+        NestedField2 int
+    }
+}
+
+testStruct := TestStruct{
+    Field1: "test",
+    Field2: 123,
+    NestedStruct: struct {
+        NestedStruct2 struct {
+            NestedField1 string
+            NestedField2 int
+        }
+        NestedField1 string
+        NestedField2 int
+    }{
+        NestedStruct2: struct {
+            NestedField1 string
+            NestedField2 int
+        }{
+            NestedField1: "nested",
+            NestedField2: 456,
+        },
+        NestedField1: "nested",
+        NestedField2: 456,
+    },
+}
+
+values, err := DeepWalk(testStruct, []string{"NestedStruct", "NestedStruct2", "NestedField1"}, "<NO_VALUE>", "all")
+if err != nil {
+    fmt.Println(err)
+}
+fmt.Println(value)
+```
+
 ## Testing
 Several categories of tests are included:
 1. A manual JSON object
@@ -99,7 +148,29 @@ Categories three and four run one-thousand iterations of each variant and each d
 
 Run all of the included tests by running `make test`:
 ```sh
+❯ make test
 go test ./... -v
+go: downloading github.com/wk8/go-ordered-map/v2 v2.1.8
+go: downloading gopkg.in/yaml.v3 v3.0.1
+go: downloading github.com/buger/jsonparser v1.1.1
+go: downloading github.com/mailru/easyjson v0.7.7
+go: downloading github.com/bahlo/generic-list-go v0.2.0
+=== RUN   TestDeepSearch
+=== RUN   TestDeepSearch/Test_case_1_-_key_found_in_map
+=== RUN   TestDeepSearch/Test_case_2_-_key_not_found_in_map
+=== RUN   TestDeepSearch/Test_case_3_-_key_found_in_nested_map
+=== RUN   TestDeepSearch/Test_case_4_-_key_not_found_in_nested_map
+=== RUN   TestDeepSearch/Test_case_7_-_key_found_in_struct
+=== RUN   TestDeepSearch/Test_case_8_-_key_not_found_in_struct
+=== RUN   TestDeepSearch/Test_case_9_-_duplicate_key_found_in_map
+--- PASS: TestDeepSearch (0.00s)
+    --- PASS: TestDeepSearch/Test_case_1_-_key_found_in_map (0.00s)
+    --- PASS: TestDeepSearch/Test_case_2_-_key_not_found_in_map (0.00s)
+    --- PASS: TestDeepSearch/Test_case_3_-_key_found_in_nested_map (0.00s)
+    --- PASS: TestDeepSearch/Test_case_4_-_key_not_found_in_nested_map (0.00s)
+    --- PASS: TestDeepSearch/Test_case_7_-_key_found_in_struct (0.00s)
+    --- PASS: TestDeepSearch/Test_case_8_-_key_not_found_in_struct (0.00s)
+    --- PASS: TestDeepSearch/Test_case_9_-_duplicate_key_found_in_map (0.00s)
 === RUN   TestDeepwalkMinimalJSON
 --- PASS: TestDeepwalkMinimalJSON (0.00s)
 === RUN   TestDeepwalkMinimalMap
@@ -117,8 +188,6 @@ go test ./... -v
 === RUN   TestDeepWalk/Test_case_10_-_array_of_maps_with_multiple_matching_keys,_return_last
 === RUN   TestDeepWalk/Test_case_11_-_array_of_maps_with_multiple_matching_keys,_return_first
 === RUN   TestDeepWalk/Test_case_12_-_array_of_maps_with_multiple_matching_keys,_return_default
-=== RUN   TestDeepWalk/Test_case_13_-_array_of_maps_with_multiple_matching_keys,_return_default
-=== RUN   TestDeepWalk/Test_case_14_-_array_of_maps_with_multiple_matching_keys,_return_default
 --- PASS: TestDeepWalk (0.00s)
     --- PASS: TestDeepWalk/Test_case_1_-_empty_object (0.00s)
     --- PASS: TestDeepWalk/Test_case_2_-_empty_keys (0.00s)
@@ -132,14 +201,24 @@ go test ./... -v
     --- PASS: TestDeepWalk/Test_case_10_-_array_of_maps_with_multiple_matching_keys,_return_last (0.00s)
     --- PASS: TestDeepWalk/Test_case_11_-_array_of_maps_with_multiple_matching_keys,_return_first (0.00s)
     --- PASS: TestDeepWalk/Test_case_12_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
-    --- PASS: TestDeepWalk/Test_case_13_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
-    --- PASS: TestDeepWalk/Test_case_14_-_array_of_maps_with_multiple_matching_keys,_return_default (0.00s)
 === RUN   TestDeepwalkRandomSuccess
 --- PASS: TestDeepwalkRandomSuccess (0.25s)
 === RUN   TestDeepwalkRandomDefault
---- PASS: TestDeepwalkRandomDefault (3.22s)
+--- PASS: TestDeepwalkRandomDefault (3.18s)
+=== RUN   TestDeepWalkWithStruct
+=== RUN   TestDeepWalkWithStruct/Test_Field1
+=== RUN   TestDeepWalkWithStruct/Test_Field2
+=== RUN   TestDeepWalkWithStruct/Test_NestedField1
+=== RUN   TestDeepWalkWithStruct/Test_NestedField2
+=== RUN   TestDeepWalkWithStruct/Test_Second-level_NestedField1
+--- PASS: TestDeepWalkWithStruct (0.00s)
+    --- PASS: TestDeepWalkWithStruct/Test_Field1 (0.00s)
+    --- PASS: TestDeepWalkWithStruct/Test_Field2 (0.00s)
+    --- PASS: TestDeepWalkWithStruct/Test_NestedField1 (0.00s)
+    --- PASS: TestDeepWalkWithStruct/Test_NestedField2 (0.00s)
+    --- PASS: TestDeepWalkWithStruct/Test_Second-level_NestedField1 (0.00s)
 PASS
-ok  	github.com/egibs/deepwalk	3.600s
+ok  	github.com/egibs/deepwalk	3.529s
 ```
 
 ## Benchmarks
