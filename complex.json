@@ -1,0 +1,229 @@
+{
+    "example": [
+        {
+            "_id": "659049edeef035eaa8e2dbda",
+            "index": 0,
+            "guid": "9e1f20b5-728a-419a-b804-ff1cf852c9af",
+            "isActive": false,
+            "balance": "$2,294.96",
+            "picture": "http://placehold.it/32x32",
+            "age": 35,
+            "eyeColor": "brown",
+            "name": "Webster Serrano",
+            "gender": "male",
+            "company": "ONTAGENE",
+            "email": "websterserrano@ontagene.com",
+            "phone": "+1 (857) 570-3829",
+            "address": "665 Lorraine Street, Rote, Virginia, 8861",
+            "about": "Ad voluptate non deserunt minim ut duis reprehenderit ad magna incididunt. Commodo ex officia labore tempor magna. Exercitation anim pariatur esse consequat nostrud eiusmod laborum ex nostrud id aute do. Reprehenderit ut tempor nisi anim labore enim ut et est eiusmod dolore exercitation.\r\n",
+            "registered": "2018-10-15T02:31:14 +05:00",
+            "latitude": -39.821308,
+            "longitude": 62.473511,
+            "tags": [
+                "eiusmod",
+                "adipisicing",
+                "velit",
+                "eu",
+                "fugiat",
+                "reprehenderit",
+                "esse"
+            ],
+            "friends": [
+                {
+                    "id": 0,
+                    "name": "Tamra Bennett"
+                },
+                {
+                    "id": 1,
+                    "name": "Alana Hoover"
+                },
+                {
+                    "id": 2,
+                    "name": "Ewing Williamson"
+                }
+            ],
+            "greeting": "Hello, Webster Serrano! You have 4 unread messages.",
+            "favoriteFruit": "strawberry"
+        },
+        {
+            "_id": "659049ed5f2f186b7ec47f72",
+            "index": 1,
+            "guid": "b5931a3b-0299-48e9-ba53-fb5288216afa",
+            "isActive": false,
+            "balance": "$1,473.05",
+            "picture": "http://placehold.it/32x32",
+            "age": 29,
+            "eyeColor": "blue",
+            "name": "Lea Bryant",
+            "gender": "female",
+            "company": "COMCUBINE",
+            "email": "leabryant@comcubine.com",
+            "phone": "+1 (862) 422-3916",
+            "address": "612 Vista Place, Townsend, Maine, 5305",
+            "about": "Sunt incididunt labore incididunt deserunt. Irure fugiat duis enim officia. Pariatur officia exercitation exercitation ea duis minim incididunt amet proident qui irure deserunt quis cillum. Exercitation duis deserunt sit tempor consequat labore magna in amet eiusmod cillum nisi magna velit. In consequat quis in duis velit dolor ad consectetur commodo qui non velit qui enim. Tempor laborum sint quis irure ipsum mollit dolore magna officia ex incididunt cillum aliqua.\r\n",
+            "registered": "2020-08-09T05:27:10 +05:00",
+            "latitude": 26.76564,
+            "longitude": -106.163592,
+            "tags": [
+                "qui",
+                "incididunt",
+                "pariatur",
+                "anim",
+                "dolor",
+                "elit",
+                "nisi"
+            ],
+            "friends": [
+                {
+                    "id": 0,
+                    "name": "Sylvia Parks"
+                },
+                {
+                    "id": 1,
+                    "name": "Hubbard Delgado"
+                },
+                {
+                    "id": 2,
+                    "name": "Townsend Calderon"
+                }
+            ],
+            "greeting": "Hello, Lea Bryant! You have 10 unread messages.",
+            "favoriteFruit": "banana"
+        },
+        {
+            "_id": "659049edc1f2f82ae4793c1b",
+            "index": 2,
+            "guid": "886a66a3-7057-407f-923d-624b19179131",
+            "isActive": true,
+            "balance": "$1,468.80",
+            "picture": "http://placehold.it/32x32",
+            "age": 24,
+            "eyeColor": "green",
+            "name": "Rebecca Walters",
+            "gender": "female",
+            "company": "CEPRENE",
+            "email": "rebeccawalters@ceprene.com",
+            "phone": "+1 (981) 569-2595",
+            "address": "446 Strauss Street, Darrtown, New Jersey, 5981",
+            "about": "Lorem magna proident ad sint enim quis commodo do sit duis. In commodo ea culpa occaecat reprehenderit. Sint commodo anim duis aute esse qui aliquip proident. Duis et esse cupidatat aliqua voluptate sint non ad laboris sint consectetur irure officia. Non ea occaecat anim nostrud consectetur qui.\r\n",
+            "registered": "2015-09-16T12:23:29 +05:00",
+            "latitude": 49.294927,
+            "longitude": 32.350086,
+            "tags": [
+                "tempor",
+                "fugiat",
+                "proident",
+                "dolor",
+                "nostrud",
+                "ullamco",
+                "aute"
+            ],
+            "friends": [
+                {
+                    "id": 0,
+                    "name": "Knapp Patton"
+                },
+                {
+                    "id": 1,
+                    "name": "Barr Floyd"
+                },
+                {
+                    "id": 2,
+                    "name": "Haynes Osborn"
+                }
+            ],
+            "greeting": "Hello, Rebecca Walters! You have 3 unread messages.",
+            "favoriteFruit": "strawberry"
+        },
+        {
+            "_id": "659049ed9aec5739828a76f1",
+            "index": 3,
+            "guid": "c18409c3-4170-4f7c-83c7-8a10e39b1402",
+            "isActive": false,
+            "balance": "$3,218.56",
+            "picture": "http://placehold.it/32x32",
+            "age": 24,
+            "eyeColor": "green",
+            "name": "Contreras Wolfe",
+            "gender": "male",
+            "company": "TALENDULA",
+            "email": "contreraswolfe@talendula.com",
+            "phone": "+1 (902) 415-3442",
+            "address": "232 Cox Place, Cassel, Missouri, 2341",
+            "about": "Magna tempor ea Lorem cillum eu esse do consequat excepteur. Nostrud consequat culpa ut et aute minim ea sint dolor Lorem ex sunt. Anim deserunt nostrud eiusmod id est nisi eiusmod laborum duis officia eu consequat tempor occaecat.\r\n",
+            "registered": "2021-04-05T09:31:10 +05:00",
+            "latitude": 57.501542,
+            "longitude": -15.555215,
+            "tags": [
+                "pariatur",
+                "laborum",
+                "ipsum",
+                "laborum",
+                "tempor",
+                "cillum",
+                "laborum"
+            ],
+            "friends": [
+                {
+                    "id": 0,
+                    "name": "Muriel Lindsay"
+                },
+                {
+                    "id": 1,
+                    "name": "Osborne Reid"
+                },
+                {
+                    "id": 2,
+                    "name": "Lois Chaney"
+                }
+            ],
+            "greeting": "Hello, Contreras Wolfe! You have 9 unread messages.",
+            "favoriteFruit": "apple"
+        },
+        {
+            "_id": "659049ed0e22e95c5885cd98",
+            "index": 4,
+            "guid": "906335b8-a200-4234-a146-bb21e19fb4f4",
+            "isActive": true,
+            "balance": "$3,323.03",
+            "picture": "http://placehold.it/32x32",
+            "age": 21,
+            "eyeColor": "green",
+            "name": "Goodwin Christensen",
+            "gender": "male",
+            "company": "XTH",
+            "email": "goodwinchristensen@xth.com",
+            "phone": "+1 (967) 500-2295",
+            "address": "531 Keen Court, Lloyd, Alabama, 2535",
+            "about": "Eu esse reprehenderit consequat pariatur ad duis pariatur. Culpa id eiusmod sit magna proident. Laboris est nulla cupidatat velit qui adipisicing nostrud. Nulla laboris nisi ullamco adipisicing consectetur et fugiat duis aliqua anim quis proident. Excepteur consectetur nulla velit eu sunt. Aliquip excepteur in ullamco quis pariatur.\r\n",
+            "registered": "2016-02-14T08:43:25 +06:00",
+            "latitude": 3.195555,
+            "longitude": -152.29361,
+            "tags": [
+                "do",
+                "ut",
+                "enim",
+                "eiusmod",
+                "eiusmod",
+                "non",
+                "pariatur"
+            ],
+            "friends": [
+                {
+                    "id": 0,
+                    "name": "Rosa Luna"
+                },
+                {
+                    "id": 1,
+                    "name": "Tabitha Moreno"
+                },
+                {
+                    "id": 2,
+                    "name": "Oneil Carlson"
+                }
+            ],
+            "greeting": "Hello, Goodwin Christensen! You have 2 unread messages.",
+            "favoriteFruit": "apple"
+        }
+    ]
+}
