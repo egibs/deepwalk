@@ -84,7 +84,7 @@ Flags:
 
 To use `DeepWalk`, use the `walk` command:
 ```
-./deepwalk walk -h                            ✔  at 11:07:14 
+./deepwalk walk -h
 walk utilizes the DeepWalk function which requires a traversal path with the last element of the slice being
                 the desired key to retrieve a value for.
 
@@ -127,8 +127,7 @@ Search result: [
   "Oneil Carlson"
 ]
 
-./deepwalk search --string-object '{"a": {"b": "c"}}' --search-
-key b
+./deepwalk search --string-object '{"a": {"b": "c"}}' --search-key b
 Search result: "c"
 ```
 
