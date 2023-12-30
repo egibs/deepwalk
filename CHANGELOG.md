@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 1.4.1 - 2023/12/30
+
+- Sign releases via GPG
+
 ## 1.4.0 - 2023/12/30
 
 - Add GoReleaser support
