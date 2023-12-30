@@ -39,13 +39,131 @@ import (
 
 The original use-case for this in Python was to traverse Python dictionaries. While Golang has different names and conventions for this, the approach remains the same.
 
-### `main.go`
+### CLI
 
-Two basic examples are provided in `main.go` --
+[Cobra](https://github.com/spf13/cobra) is used to provide CLI support for `deepwalk`.
+
+To get started, build the `deepwalk` binary with `make build`.
+
+Then, run `deepwalk` to see the available commands:
+
+```sh
+❯  ./deepwalk -h
+Usage:
+  deepwalk [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  search      Naively search an object for the specified key
+  walk        Walk an object for the specified keys and return the value associated with the last key
+
+Flags:
+  -h, --help   help for deepwalk
+
+Use "deepwalk [command] --help" for more information about a command.
 ```
-❯ go run main.go
-Value should be 'foo': foo
-Value2 should be '[foo bar baz]': [foo bar baz]
+
+To use `DeepSearch`, use the `search` command:
+```sh
+./deepwalk search -h
+search utilizes the DeepSearch function which does not need to know the structure of the data.
+                It will search the entire object for the specified key and return the value associated with that key.
+
+Usage:
+  deepwalk search [object to search] [search key] [default value] [return value] [flags]
+
+Flags:
+      --default-value string   Default value to return if search fails (default "<NO_VALUE>")
+      --file-object string     File name containing object to search
+  -h, --help                   help for search
+      --return-value string    Value to return if search succeeds (default "all")
+      --search-key string      Key to search for
+      --string-object string   String object to search
+```
+
+To use `DeepWalk`, use the `walk` command:
+```
+./deepwalk walk -h                            ✔  at 11:07:14 
+walk utilizes the DeepWalk function which requires a traversal path with the last element of the slice being
+                the desired key to retrieve a value for.
+
+Usage:
+  deepwalk walk [object to walk] [search keys] [default value] [return value] [flags]
+
+Flags:
+      --default-value string   Default value to return if search fails (default "<NO_VALUE>")
+      --file-object string     File name containing object to search
+  -h, --help                   help for walk
+      --return-value string    Value to return if search succeeds (default "all")
+      --search-keys strings    Keys to search for
+      --string-object string   String object to search
+```
+
+Examples of using both commands:
+`search`:
+```sh
+./deepwalk search  --file-object complex.json --search-key name
+Search result: [
+  "Tamra Bennett",
+  "Alana Hoover",
+  "Ewing Williamson",
+  "Webster Serrano",
+  "Lea Bryant",
+  "Sylvia Parks",
+  "Hubbard Delgado",
+  "Townsend Calderon",
+  "Knapp Patton",
+  "Barr Floyd",
+  "Haynes Osborn",
+  "Rebecca Walters",
+  "Muriel Lindsay",
+  "Osborne Reid",
+  "Lois Chaney",
+  "Contreras Wolfe",
+  "Goodwin Christensen",
+  "Rosa Luna",
+  "Tabitha Moreno",
+  "Oneil Carlson"
+]
+
+./deepwalk search --string-object '{"a": {"b": "c"}}' --search-
+key b
+Search result: "c"
+```
+
+`walk`:
+```sh
+./deepwalk walk --file-object complex.json --search-keys example,friends,id
+Search result: [
+  [
+    0,
+    1,
+    2
+  ],
+  [
+    0,
+    1,
+    2
+  ],
+  [
+    0,
+    1,
+    2
+  ],
+  [
+    0,
+    1,
+    2
+  ],
+  [
+    0,
+    1,
+    2
+  ]
+]
+./deepwalk walk --string-object '{"a": {"b": "c"}}' --search-keys a,b
+Search result: "c"
 ```
 
 ### JSON

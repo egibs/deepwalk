@@ -4,7 +4,7 @@ bench:
 	go test ./... -bench=. -benchmem
 
 build:
-	go build -race ./...
+	go build -race .
 
 clean-mod:
 	go clean -modcache

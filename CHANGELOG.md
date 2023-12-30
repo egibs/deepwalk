@@ -2,6 +2,31 @@
 
 [comment]: # (Changes since last release go here)
 
+## 1.3.0 - 2023/12/30
+
+- Add CLI support to `deepwalk` via Cobra
+
+## 1.2.1 - 2023/12/29
+
+- Use `internal` and `pkg` directories
+
+## 1.2.0 - 2023/12/29
+
+- Improve package structure
+
+## 1.1.1 - 2023/12/29
+
+- Add dynamic benchmarks for DeepSearch
+
+## 1.1.0 - 2023/12/29
+
+- Add DeepSearch functionality
+
+## 1.0.0 - 2023/12/27
+
+- Refactor code
+- Add support for structs
+
 ## 0.3.1 - 2023/12/19
 
 - Minor updates
