@@ -2,6 +2,11 @@
 
 [comment]: # (Changes since last release go here)
 
+## 1.4.3 - 2023/12/30
+
+- Remove errant debug output
+- Add SBOM generation to release Workflow
+
 ## 1.4.2 - 2023/12/30
 
 - Refactor CLI code
