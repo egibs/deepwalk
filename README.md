@@ -394,4 +394,3 @@ To cut a release for this package, do the following:
 ## TODO
 
 - For now, the functionality of the package is the primary goal, but eventually more robust examples, functionality, and documentation are on the table
-- Adding a `GoReleaser` Workflow and tweaking the package to account for that is potentially worth doing as well
