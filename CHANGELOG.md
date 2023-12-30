@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 1.4.4 - 2023/12/30
+
+- Fix incorrect IsEmpty logic
+
 ## 1.4.3 - 2023/12/30
 
 - Remove errant debug output
