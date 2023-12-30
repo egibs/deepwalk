@@ -13,8 +13,8 @@ var MaxDepth = 10
 // IsEmpty checks if the specified object is empty
 func IsEmpty(subObj interface{}) bool {
 	switch subObject := subObj.(type) {
-	case string:
-		return false
+	case map[string]interface{}:
+		return len(subObject) == 0
 	case []interface{}:
 		for _, nextObj := range subObject {
 			if !IsEmpty(nextObj) {
@@ -22,6 +22,8 @@ func IsEmpty(subObj interface{}) bool {
 			}
 		}
 		return true
+	case string:
+		return subObject == ""
 	default:
 		return false
 	}
