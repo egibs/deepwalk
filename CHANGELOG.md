@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 1.4.0 - 2023/12/30
+
+- Add GoReleaser support
+
 ## 1.3.0 - 2023/12/30
 
 - Add CLI support to `deepwalk` via Cobra
