@@ -28,7 +28,6 @@ func CmdSearch(
 			if err != nil {
 				fmt.Println(err)
 			}
-			fmt.Println("Object:", *parsedObject)
 			result, err := deepsearch.DeepSearch(*parsedObject, *searchKey, *defaultValue, *returnValue)
 			if err != nil {
 				fmt.Println("Error occurred:", err)
