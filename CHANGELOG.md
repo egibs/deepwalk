@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 1.4.2 - 2023/12/30
+
+- Refactor CLI code
+
 ## 1.4.1 - 2023/12/30
 
 - Sign releases via GPG

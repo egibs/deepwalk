@@ -66,44 +66,42 @@ Use "deepwalk [command] --help" for more information about a command.
 
 To use `DeepSearch`, use the `search` command:
 ```sh
-./deepwalk search -h
+❯ ./deepwalk search -h
 search utilizes the DeepSearch function which does not need to know the structure of the data.
                 It will search the entire object for the specified key and return the value associated with that key.
 
 Usage:
-  deepwalk search [object to search] [search key] [default value] [return value] [flags]
+  deepwalk search --object <filename or JSON string> --search-key <search key> --default-value <default value> --return-value <return value> [flags]
 
 Flags:
-      --default-value string   Default value to return if search fails (default "<NO_VALUE>")
-      --file-object string     File name containing object to search
+      --default-value string   Default value to return if search fails (default "NO_VALUE")
   -h, --help                   help for search
+      --object string          Object to search
       --return-value string    Value to return if search succeeds (default "all")
       --search-key string      Key to search for
-      --string-object string   String object to search
 ```
 
 To use `DeepWalk`, use the `walk` command:
-```
-./deepwalk walk -h
+```sh
+❯ ./deepwalk walk -h
 walk utilizes the DeepWalk function which requires a traversal path with the last element of the slice being
                 the desired key to retrieve a value for.
 
 Usage:
-  deepwalk walk [object to walk] [search keys] [default value] [return value] [flags]
+  deepwalk walk --object <filename or JSON string> --search-keys <search key 1, search key 2> --default-value <default value> --return-value <return value> [flags]
 
 Flags:
-      --default-value string   Default value to return if search fails (default "<NO_VALUE>")
-      --file-object string     File name containing object to search
+      --default-value string   Default value to return if search fails (default "NO_VALUE")
   -h, --help                   help for walk
+      --object string          Object to search
       --return-value string    Value to return if search succeeds (default "all")
       --search-keys strings    Keys to search for
-      --string-object string   String object to search
 ```
 
 Examples of using both commands:
 `search`:
 ```sh
-./deepwalk search  --file-object complex.json --search-key name
+./deepwalk search  --object complex.json --search-key name
 Search result: [
   "Tamra Bennett",
   "Alana Hoover",
@@ -127,13 +125,13 @@ Search result: [
   "Oneil Carlson"
 ]
 
-./deepwalk search --string-object '{"a": {"b": "c"}}' --search-key b
+./deepwalk search --object '{"a": {"b": "c"}}' --search-key b
 Search result: "c"
 ```
 
 `walk`:
 ```sh
-./deepwalk walk --file-object complex.json --search-keys example,friends,id
+./deepwalk walk --object complex.json --search-keys example,friends,id
 Search result: [
   [
     0,
@@ -161,7 +159,7 @@ Search result: [
     2
   ]
 ]
-./deepwalk walk --string-object '{"a": {"b": "c"}}' --search-keys a,b
+./deepwalk walk --object '{"a": {"b": "c"}}' --search-keys a,b
 Search result: "c"
 ```
 

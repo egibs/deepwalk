@@ -2,7 +2,9 @@ package util
 
 import (
 	"crypto/rand"
+	"encoding/json"
 	"math/big"
+	"os"
 	"strings"
 )
 
@@ -219,4 +221,22 @@ func DefaultCases(depth int, maxDepth int) (interface{}, []interface{}, error) {
 		return map[string]interface{}{key: nested}, nil, nil
 	}
 	return kvPair, nil, nil
+}
+
+func HandleObjectInput(input string, parsedInput *map[string]interface{}) error {
+	if _, err := os.Stat(input); err == nil {
+		contents, err := os.ReadFile(input)
+		if err != nil {
+			return err
+		}
+		err = json.Unmarshal([]byte(contents), parsedInput)
+		if err != nil {
+			return err
+		}
+	} else {
+		if err := json.Unmarshal([]byte(input), parsedInput); err != nil {
+			return err
+		}
+	}
+	return nil
 }
