@@ -54,18 +54,18 @@ Flags:
 Use "deepwalk [command] --help" for more information about a command.
 ```
 
-To use `Traverse`, use the `search` command:
+To use `Traverse`, use the `traverse` command:
 ```sh
-❯ ./deepwalk search -h
-search utilizes the DeepSearch function which does not need to know the structure of the data.
-                It will search the entire object for the specified key and return the value associated with that key.
+./deepwalk traverse -h
+traverse utilizes the Traverse function which requires a ReturnControl value to determine what to return.
+		First will return the first value found, Last will return the last value found, and All will return all values found.
 
 Usage:
-  deepwalk search --object <filename or JSON string> --search-key <search key> --default-value <default value> --return-value <return value> [flags]
+  deepwalk traverse --object <filename or JSON string> --search-key <search key> --default-value <default value> --return-value <return value> [flags]
 
 Flags:
       --default-value string   Default value to return if search fails (default "NO_VALUE")
-  -h, --help                   help for search
+  -h, --help                   help for traverse
       --object string          Object to search
       --return-value string    Value to return if search succeeds (default "all")
       --search-key string      Key to search for
