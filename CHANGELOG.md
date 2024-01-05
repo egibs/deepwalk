@@ -2,6 +2,10 @@
 
 [comment]: # (Changes since last release go here)
 
+## 2.0.0 - 2024/01/05
+
+- Move to a consolidated, iterative approach
+
 ## 1.4.4 - 2023/12/30
 
 - Fix incorrect IsEmpty logic

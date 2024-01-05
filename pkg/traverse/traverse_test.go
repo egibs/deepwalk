@@ -1,4 +1,4 @@
-package deepsearch
+package traverse
 
 import (
 	"reflect"
@@ -7,7 +7,7 @@ import (
 	util "github.com/egibs/deepwalk/internal/util"
 )
 
-func TestDeepSearch(t *testing.T) {
+func TestTraverse(t *testing.T) {
 	type args struct {
 		obj        interface{}
 		searchKey  string
@@ -81,9 +81,9 @@ func TestDeepSearch(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Test case 7 - key found in struct",
+			name: "Test case 5 - key found in struct",
 			args: args{
-				obj: struct {
+				obj: &struct {
 					Key1 string
 					Key2 string
 				}{
@@ -98,9 +98,9 @@ func TestDeepSearch(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Test case 8 - key not found in struct",
+			name: "Test case 6 - key not found in struct",
 			args: args{
-				obj: struct {
+				obj: &struct {
 					Key1 string
 					Key2 string
 				}{
@@ -115,7 +115,7 @@ func TestDeepSearch(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Test case 9 - duplicate key found in map",
+			name: "Test case 7 - duplicate key found in map",
 			args: args{
 				obj: map[string]interface{}{
 					"key1": "value1",
@@ -132,20 +132,29 @@ func TestDeepSearch(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := DeepSearch(tt.args.obj, tt.args.searchKey, tt.args.defaultVal, tt.args.returnVal)
+			var returnValueType ReturnControl
+			switch tt.args.returnVal {
+			case "first":
+				returnValueType = First
+			case "last":
+				returnValueType = Last
+			case "all":
+				returnValueType = All
+			}
+			got, err := Traverse(tt.args.obj, tt.args.searchKey, tt.args.defaultVal, returnValueType)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("DeepSearch() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Traverse() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("DeepSearch() = %v, want %v", got, tt.want)
+				t.Errorf("Traverse() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func BenchmarkDeepSearch(b *testing.B) {
-	obj := map[string]interface{}{
+func BenchmarkTraverse(b *testing.B) {
+	mapObj := map[string]interface{}{
 		"key1": "value1",
 		"key2": map[string]interface{}{
 			"key3": "value3",
@@ -159,46 +168,58 @@ func BenchmarkDeepSearch(b *testing.B) {
 		},
 	}
 
+	var obj interface{} = mapObj
+	var searchKey string = "key5"
+	var defaultVal string = "default"
+	var returnValueType ReturnControl = First
+
 	for i := 0; i < b.N; i++ {
-		have, err := DeepSearch(obj, "key5", "default", "first")
+		have, err := Traverse(obj, searchKey, defaultVal, returnValueType)
 		expected := "value5"
 		if err != nil {
-			b.Errorf("DeepSearch() error = %v", err)
+			b.Errorf("Traverse() error = %v", err)
 		}
 		if !reflect.DeepEqual(have, expected) {
-			b.Errorf("DeepSearch() = %v, want %v", have, expected)
+			b.Errorf("Traverse() = %v, want %v", have, expected)
 		}
 	}
 }
 
-func BenchmarkDeepsearchSuccess(b *testing.B) {
+func BenchmarkTraverseSuccess(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		data, keys, expected, err := util.SucessCases(nil, util.MaxDepth)
+		dataMap, keys, expected, err := util.SucessCases(nil, util.MaxDepth)
 		if err != nil {
 			b.Errorf("SucessCases() error = %v", err)
 		}
-		have, err := DeepSearch(data, keys[len(keys)-1], "default", "all")
+		var data interface{} = dataMap
+		var defaultVal string = "default"
+		var returnValueType ReturnControl = All
+		have, err := Traverse(data, keys[len(keys)-1], defaultVal, returnValueType)
 		if err != nil {
-			b.Errorf("DeepSearch() error = %v", err)
+			b.Errorf("Traverse() error = %v", err)
 		}
 		if !reflect.DeepEqual(have, expected) {
-			b.Errorf("DeepSearch() = %v, want %v", have, expected)
+			b.Errorf("Traverse() = %v, want %v", have, expected)
 		}
 	}
 }
 
-func BenchmarkDeepsearchDefault(b *testing.B) {
+func BenchmarkTraverseDefault(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		data, _, err := util.DefaultCases(0, util.MaxDepth)
+		dataMap, _, err := util.DefaultCases(0, util.MaxDepth)
 		if err != nil {
 			b.Errorf("defaultCases() error = %v", err)
 		}
-		have, err := DeepSearch(data, "", "default", "all")
+		var data interface{} = dataMap
+		var searchKey string = ""
+		var defaultVal string = "default"
+		var returnValueType ReturnControl = All
+		have, err := Traverse(data, searchKey, defaultVal, returnValueType)
 		if err := err; err != nil {
-			b.Errorf("DeepSearch() error = %v", err)
+			b.Errorf("Traverse() error = %v", err)
 		}
 		if !reflect.DeepEqual(have, "default") {
-			b.Errorf("DeepSearch() = %v, want %v", have, "default")
+			b.Errorf("Traverse() = %v, want %v", have, "default")
 		}
 	}
 }

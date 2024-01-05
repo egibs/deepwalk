@@ -225,7 +225,7 @@ func DefaultCases(depth int, maxDepth int) (interface{}, []interface{}, error) {
 	return kvPair, nil, nil
 }
 
-func HandleObjectInput(input string, parsedInput *map[string]interface{}) error {
+func HandleObjectInput(input string, parsedInput interface{}) error {
 	if _, err := os.Stat(input); err == nil {
 		contents, err := os.ReadFile(input)
 		if err != nil {
