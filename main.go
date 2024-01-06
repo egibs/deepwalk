@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/egibs/deepwalk/cmd"
+	"github.com/egibs/deepwalk/v2/cmd"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +11,6 @@ var (
 	parsedObject interface{}
 	returnValue  string
 	searchKey    string
-	searchKeys   []string
 )
 
 func main() {

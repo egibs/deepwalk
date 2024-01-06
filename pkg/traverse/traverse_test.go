@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	util "github.com/egibs/deepwalk/internal/util"
+	util "github.com/egibs/deepwalk/v2/internal/util"
 )
 
 func TestTraverse(t *testing.T) {

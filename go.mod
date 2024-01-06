@@ -1,4 +1,4 @@
-module github.com/egibs/deepwalk
+module github.com/egibs/deepwalk/v2
 
 go 1.21
 

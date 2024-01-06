@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/egibs/deepwalk/internal/util"
-	"github.com/egibs/deepwalk/pkg/traverse"
+	"github.com/egibs/deepwalk/v2/internal/util"
+	"github.com/egibs/deepwalk/v2/pkg/traverse"
 	"github.com/spf13/cobra"
 )
 
