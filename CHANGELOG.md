@@ -2,6 +2,18 @@
 
 [comment]: # (Changes since last release go here)
 
+## 2.0.3 - 2024/01/06
+
+- Minor `README.md` updates
+
+## 2.0.2 - 2024/01/06
+
+- Minor `README.md` updates
+
+## 2.0.1 - 2024/01/06
+
+- `v2/` module capability
+
 ## 2.0.0 - 2024/01/05
 
 - Move to a consolidated, iterative approach
