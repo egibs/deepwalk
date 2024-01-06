@@ -16,13 +16,13 @@ Usage examples can be found in `pkg/traverse/traverse_test.go`, but because code
 
 To install `deepwalk`, run the following:
 ```sh
-go install github.com/egibs/deepwalk@latest
+go install github.com/egibs/deepwalk/v2@latest
 ```
 
 Import `traverse` like so:
 ```go
 import (
-    "github.com/egibs/deepwalk/pkg/traverse"
+    "github.com/egibs/deepwalk/pkg/v2traverse"
 )
 ```
 
@@ -220,9 +220,16 @@ Run all of the included tests by running `make test`:
 ```sh
 ❯ make test
 go test ./... -v
-?   	github.com/egibs/deepwalk	[no test files]
-?   	github.com/egibs/deepwalk/cmd	[no test files]
-?   	github.com/egibs/deepwalk/internal/util	[no test files]
+go: downloading github.com/wk8/go-ordered-map/v2 v2.1.8
+go: downloading github.com/spf13/cobra v1.8.0
+go: downloading github.com/spf13/pflag v1.0.5
+go: downloading gopkg.in/yaml.v3 v3.0.1
+go: downloading github.com/bahlo/generic-list-go v0.2.0
+go: downloading github.com/buger/jsonparser v1.1.1
+go: downloading github.com/mailru/easyjson v0.7.7
+?       github.com/egibs/deepwalk/v2    [no test files]
+?       github.com/egibs/deepwalk/v2/cmd        [no test files]
+?       github.com/egibs/deepwalk/v2/internal/util      [no test files]
 === RUN   TestTraverse
 === RUN   TestTraverse/Test_case_1_-_key_found_in_map
 === RUN   TestTraverse/Test_case_2_-_key_not_found_in_map
@@ -240,7 +247,7 @@ go test ./... -v
     --- PASS: TestTraverse/Test_case_6_-_key_not_found_in_struct (0.00s)
     --- PASS: TestTraverse/Test_case_7_-_duplicate_key_found_in_map (0.00s)
 PASS
-ok  	github.com/egibs/deepwalk/pkg/traverse	0.121s
+ok      github.com/egibs/deepwalk/v2/pkg/traverse       0.002s
 ```
 
 ## Benchmarks
@@ -248,17 +255,18 @@ Run the included benchmarks by running `make bench`:
 ```sh
 ❯ make bench
 go test ./... -bench=. -benchmem
-?   	github.com/egibs/deepwalk	[no test files]
-?   	github.com/egibs/deepwalk/cmd	[no test files]
-?   	github.com/egibs/deepwalk/internal/util	[no test files]
-goos: darwin
-goarch: arm64
-pkg: github.com/egibs/deepwalk/pkg/traverse
-BenchmarkTraverse-10           	 1477845	       818.8 ns/op	     332 B/op	      20 allocs/op
-BenchmarkTraverseSuccess-10    	    5090	    234816 ns/op	   27259 B/op	    1534 allocs/op
-BenchmarkTraverseDefault-10    	     477	   2590385 ns/op	  298509 B/op	   16792 allocs/op
+?       github.com/egibs/deepwalk/v2    [no test files]
+?       github.com/egibs/deepwalk/v2/cmd        [no test files]
+?       github.com/egibs/deepwalk/v2/internal/util      [no test files]
+goos: linux
+goarch: amd64
+pkg: github.com/egibs/deepwalk/v2/pkg/traverse
+cpu: 12th Gen Intel(R) Core(TM) i9-12900K
+BenchmarkTraverse-24             1000000              1020 ns/op             764 B/op         28 allocs/op
+BenchmarkTraverseSuccess-24         7668            156473 ns/op           27399 B/op       1525 allocs/op
+BenchmarkTraverseDefault-24          706           1739258 ns/op          297695 B/op      16732 allocs/op
 PASS
-ok  	github.com/egibs/deepwalk/pkg/traverse	4.858s
+ok      github.com/egibs/deepwalk/v2/pkg/traverse       3.652s
 ```
 
 ## Miscellaneous
