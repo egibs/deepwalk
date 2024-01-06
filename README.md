@@ -22,7 +22,7 @@ go install github.com/egibs/deepwalk/v2@latest
 Import `traverse` like so:
 ```go
 import (
-    "github.com/egibs/deepwalk/pkg/v2traverse"
+    "github.com/egibs/deepwalk/pkg/v2/traverse"
 )
 ```
 
