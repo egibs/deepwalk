@@ -117,21 +117,11 @@ var exampleJSON = []byte(`{
 The value of `inner_key` can be retrieved like so:
 ```go
 var object map[string]interface{}
-returnValue := "all"
-var returnValueType traverse.ReturnControl
-switch returnValue {
-case "first":
-    returnValueType = traverse.First
-case "last":
-    returnValueType = traverse.Last
-case "all":
-    returnValueType = traverse.All
-}
 err := json.Unmarshal(exampleJSON, &object)
 if err != nil {
     fmt.Println(err)
 }
-value, err := deepwalk.Traverse(object, "key", "<NO_VALUE>", returnValueType)
+value, err := deepwalk.Traverse(object, "key", "<NO_VALUE>", traverse.All)
 if err != nil {
     fmt.Println(err)
 }
@@ -163,18 +153,8 @@ var exampleMap = map[string]interface{}{
 		},
 	},
 }
-var obj interface{} = exampleMap
-returnValue := "all"
-var returnValueType traverse.ReturnControl
-switch returnValue {
-case "first":
-    returnValueType = traverse.First
-case "last":
-    returnValueType = traverse.Last
-case "all":
-    returnValueType = traverse.All
-}
-value, err := deepwalk.Traverse(obj, "very_nested_key", "<NO_VALUE>", returnValueType)
+
+value, err := deepwalk.Traverse(obj, "very_nested_key", "<NO_VALUE>", traverse.All)
 if err != nil {
     fmt.Println(err)
 }
@@ -221,18 +201,7 @@ testStruct := TestStruct{
     },
 }
 
-returnValue := "all"
-var returnValueType traverse.ReturnControl
-switch returnValue {
-case "first":
-    returnValueType = traverse.First
-case "last":
-    returnValueType = traverse.Last
-case "all":
-    returnValueType = traverse.All
-}
-
-value, err := deepwalk.Traverse(testStruct, "NestedField1", "<NO_VALUE>", returnValueType)
+value, err := deepwalk.Traverse(testStruct, "NestedField1", "<NO_VALUE>", traverse.All)
 if err != nil {
     fmt.Println(err)
 }
