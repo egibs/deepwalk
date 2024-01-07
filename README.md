@@ -117,11 +117,21 @@ var exampleJSON = []byte(`{
 The value of `inner_key` can be retrieved like so:
 ```go
 var object map[string]interface{}
+returnValue := "all"
+var returnValueType traverse.ReturnControl
+switch returnValue {
+case "first":
+    returnValueType = traverse.First
+case "last":
+    returnValueType = traverse.Last
+case "all":
+    returnValueType = traverse.All
+}
 err := json.Unmarshal(exampleJSON, &object)
 if err != nil {
     fmt.Println(err)
 }
-value, err := deepwalk.Traverse(object, "key", "<NO_VALUE>", "all")
+value, err := deepwalk.Traverse(object, "key", "<NO_VALUE>", returnValueType)
 if err != nil {
     fmt.Println(err)
 }
@@ -154,7 +164,17 @@ var exampleMap = map[string]interface{}{
 	},
 }
 var obj interface{} = exampleMap
-values, err := deepwalk.Traverse(obj, "very_nested_key", "<NO_VALUE>", "all")
+returnValue := "all"
+var returnValueType traverse.ReturnControl
+switch returnValue {
+case "first":
+    returnValueType = traverse.First
+case "last":
+    returnValueType = traverse.Last
+case "all":
+    returnValueType = traverse.All
+}
+value, err := deepwalk.Traverse(obj, "very_nested_key", "<NO_VALUE>", returnValueType)
 if err != nil {
     fmt.Println(err)
 }
@@ -201,7 +221,18 @@ testStruct := TestStruct{
     },
 }
 
-values, err := deepwalk.Traverse(testStruct, "NestedField1", "<NO_VALUE>", "all")
+returnValue := "all"
+var returnValueType traverse.ReturnControl
+switch returnValue {
+case "first":
+    returnValueType = traverse.First
+case "last":
+    returnValueType = traverse.Last
+case "all":
+    returnValueType = traverse.All
+}
+
+value, err := deepwalk.Traverse(testStruct, "NestedField1", "<NO_VALUE>", returnValueType)
 if err != nil {
     fmt.Println(err)
 }
