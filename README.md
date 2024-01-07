@@ -154,7 +154,7 @@ var exampleMap = map[string]interface{}{
 	},
 }
 var obj interface{} = exampleMap
-values, err := deepwalk.DeepWalk(obj, "very_nested_key", "<NO_VALUE>", "all")
+values, err := deepwalk.Traverse(obj, "very_nested_key", "<NO_VALUE>", "all")
 if err != nil {
     fmt.Println(err)
 }
@@ -201,7 +201,7 @@ testStruct := TestStruct{
     },
 }
 
-values, err := deepwalk.DeepWalk(testStruct, "NestedField1", "<NO_VALUE>", "all")
+values, err := deepwalk.Traverse(testStruct, "NestedField1", "<NO_VALUE>", "all")
 if err != nil {
     fmt.Println(err)
 }
