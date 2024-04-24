@@ -21,8 +21,6 @@ builds:
     - -trimpath
   mod_timestamp: '{{ .CommitTimestamp }}'
   ldflags:
-    - -extldflags "-static"
-    - "{{ .Env.LDFLAGS }}"
     - -X main.BuildVersion={{.Version}}
 
 signs:
