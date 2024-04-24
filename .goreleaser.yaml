@@ -1,11 +1,47 @@
+project_name: bincapz
+
+before:
+  hooks:
+    - go mod download
+
+env:
+  - COSIGN_YES=true
+
+builds:
+- id: deepwalk-build
+  binary: deepwalk
+  main: ./
+  env:
+  - CGO_ENABLED=0
+  goos:
+    - darwin
+    - linux
+    - windows
+  flags:
+    - -trimpath
+  mod_timestamp: '{{ .CommitTimestamp }}'
+  ldflags:
+    - -extldflags "-static"
+    - "{{ .Env.LDFLAGS }}"
+    - -X main.BuildVersion={{.Version}}
+
 signs:
-  - artifacts: checksum
-    cmd: gpg2
-    args:
-      - "--batch"
-      - "-u"
-      - "{{ .Env.GPG_FINGERPRINT }}"
-      - "--output"
-      - "${signature}"
-      - "--detach-sign"
-      - "${artifact}"
+  - id: deepwalk-cosign
+    cmd: cosign
+    certificate: "${artifact}.crt"
+    args: ["sign-blob", "--output-signature", "${signature}", "--output-certificate", "${certificate}", "${artifact}", "--yes"]
+    artifacts: all
+
+archives:
+- files:
+    - LICENSE
+  wrap_in_directory: true
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
