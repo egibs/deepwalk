@@ -4,7 +4,10 @@ bench:
 	go test ./... -bench=. -benchmem
 
 build:
-	go build -race .
+	go build -race -o deepwalk .
+
+build-docker:
+	docker buildx build -f Dockerfile.wolfi . --load
 
 clean-mod:
 	go clean -modcache
