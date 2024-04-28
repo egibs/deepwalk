@@ -26,6 +26,16 @@ import (
 )
 ```
 
+Or, use the provided Dockerfile:
+```
+make build-wolfi
+```
+
+then:
+```
+docker run deepwalk:latest
+```
+
 ## Examples
 
 The original use-case for this in Python was to traverse Python dictionaries. While Golang has different names and conventions for this, the approach remains the same.
@@ -281,6 +291,25 @@ To cut a release for this package, do the following:
 - Run `git tag vX.Y.Z`
 - Run `git push origin --tags`
 - Create a new release using the new tag
+
+### Dockerfile Scan
+
+0 CVEs c/o Wolfi:
+```
+❯ grype deepwalk:latest
+ ✔ Vulnerability DB                [no update available]
+ ✔ Loaded image                                                                                                                      deepwalk:latest
+ ✔ Parsed image                                                              sha256:15776b55889a5e6500937a6ee1d9c8b0c5f6dea8f2e9631e324f27fa48a7077c
+ ✔ Cataloged contents                                                               a89b0db2a340569633d593f81c58297e103de4b8ca80f97459ed5678809c4f24
+   ├── ✔ Packages                        [14 packages]
+   ├── ✔ File digests                    [397 files]
+   ├── ✔ File metadata                   [397 locations]
+   └── ✔ Executables                     [1 executables]
+ ✔ Scanned for vulnerabilities     [0 vulnerability matches]
+   ├── by severity: 0 critical, 0 high, 0 medium, 0 low, 0 negligible
+   └── by status:   0 fixed, 0 not-fixed, 0 ignored
+No vulnerabilities found
+```
 
 ## Acknowledgements
 

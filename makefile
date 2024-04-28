@@ -4,7 +4,10 @@ bench:
 	go test ./... -bench=. -benchmem
 
 build:
-	go build -race .
+	go build -race -o deepwalk .
+
+build-docker:
+	docker buildx build -f Dockerfile . --load -t deepwalk:latest
 
 clean-mod:
 	go clean -modcache
