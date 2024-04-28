@@ -7,7 +7,7 @@ build:
 	go build -race -o deepwalk .
 
 build-docker:
-	docker buildx build -f Dockerfile.wolfi . --load
+	docker buildx build -f Dockerfile . --load -t deepwalk:latest
 
 clean-mod:
 	go clean -modcache
