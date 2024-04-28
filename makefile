@@ -4,7 +4,7 @@ bench:
 	go test ./... -bench=. -benchmem
 
 build:
-	go build -race -o deepwalk .
+	CGO_ENABLED=0 go build -o deepwalk .
 
 build-docker:
 	docker buildx build -f Dockerfile . --load -t deepwalk:latest
