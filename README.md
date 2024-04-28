@@ -28,7 +28,7 @@ import (
 
 Or, use the provided Dockerfile:
 ```
-make build-wolfi
+make build-docker
 ```
 
 then:
