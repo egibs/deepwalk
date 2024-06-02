@@ -3,7 +3,7 @@ FROM cgr.dev/chainguard/wolfi-base as build
 USER root
 
 RUN apk update \
-    && apk add --no-cache make go
+    && apk add --no-cache go
 
 WORKDIR /deepwalk
 
