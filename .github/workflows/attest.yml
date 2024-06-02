@@ -18,10 +18,7 @@ jobs:
       - uses: step-security/harden-runner@f086349bfa2bd1361f7909c78558e816508cdc10 # v2.8.0
         with:
           disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            fulcio.sigstore.dev:443
-            github.com:443
+          egress-policy: audit
       - name: Checkout
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
       - name: Set up Go
