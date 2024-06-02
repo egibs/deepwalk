@@ -1,0 +1,40 @@
+name: deepwalk-attest
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+        - '*'
+
+permissions:
+  id-token: write
+  contents: read
+  attestations: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: step-security/harden-runner@f086349bfa2bd1361f7909c78558e816508cdc10 # v2.8.0
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+            objects.githubusercontent.com:443
+            proxy.golang.org:443
+      - name: Checkout
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
+      - name: Set up Go
+        uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7
+        with:
+            go-version-file: '.go-version'
+      - name: go mod tidy
+        run: make tidy
+      - name: Build artifact
+        run: make build
+      - name: Attest
+        uses: actions/attest-build-provenance@173725a1209d09b31f9d30a3890cf2757ebbff0d
+        with:
+          subject-path: '${{ github.workspace }}/deepwalk'
