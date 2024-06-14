@@ -3,7 +3,7 @@ module github.com/egibs/deepwalk/v2
 go 1.22
 
 require (
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 	github.com/wk8/go-ordered-map/v2 v2.1.8
 )
 
