@@ -19,6 +19,8 @@ jobs:
             github.com:443
             objects.githubusercontent.com:443
             proxy.golang.org:443
+            storage.googleapis.com:443
+            sum.golang.org:443
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7
         with:
