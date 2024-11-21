@@ -50,4 +50,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate SBOM via Syft
-        uses: anchore/sbom-action@fc46e51fd3cb168ffb36c6d1915723c47db58abb
+        uses: anchore/sbom-action@55dc4ee22412511ee8c3142cbea40418e6cec693
