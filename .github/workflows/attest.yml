@@ -34,6 +34,6 @@ jobs:
       - name: Build artifact
         run: make build
       - name: Attest
-        uses: actions/attest-build-provenance@c4fbc648846ca6f503a13a2281a5e7b98aa57202
+        uses: actions/attest-build-provenance@7668571508540a607bdfd90a87a560489fe372eb
         with:
           subject-path: '${{ github.workspace }}/deepwalk'
